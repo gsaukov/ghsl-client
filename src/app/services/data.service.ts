@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class NominatimService {
+export class DataService {
 
   constructor(private http: HttpClient) {
   }
