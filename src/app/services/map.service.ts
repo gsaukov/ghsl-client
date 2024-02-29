@@ -6,7 +6,26 @@ import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import {Observable} from "rxjs";
 import {ScaleLine, defaults} from "ol/control";
+import GeoJSON from 'ol/format/GeoJSON';
+import Layer from 'ol/layer/Layer';
+import VectorSource from 'ol/source/Vector';
+import WebGLVectorLayerRenderer from 'ol/renderer/webgl/VectorLayer';
 
+const style = {
+  'stroke-color': ['*', ['get', 'COLOR'], [220, 220, 220]],
+  'stroke-width': 2,
+  'stroke-offset': -1,
+  'fill-color': ['*', ['get', 'COLOR'], [255, 255, 255, 0.6]],
+};
+
+class WebGLLayer extends Layer {
+  // @ts-ignore
+  createRenderer() {
+    return new WebGLVectorLayerRenderer(this, {
+      style,
+    });
+  }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +38,10 @@ export class MapService {
   }
 
   buildMap(): Observable<Map> {
+    const osm = new TileLayer({
+      source: new OSM(),
+    });
+
     return new Observable((observer) => {
       const map = new Map({
         controls: defaults().extend([new ScaleLine({
@@ -35,6 +58,7 @@ export class MapService {
                 '<a href="https://www.openstreetmap.org/copyright" target="_blank" style="color:blue;">OpenStreetMap</a> contributors',
             }),
           }),
+          this.getDefaultVectorLayer()
         ],
         target: 'ol-map',
       });
@@ -45,6 +69,16 @@ export class MapService {
 
   getMap(): Map {
     return this.map;
+  }
+
+  getDefaultVectorLayer() {
+    const vectorLayer = new WebGLLayer({
+      source: new VectorSource({
+        url: 'https://openlayers.org/data/vector/ecoregions.json',
+        format: new GeoJSON(),
+      }),
+    });
+    return vectorLayer
   }
 
 }
