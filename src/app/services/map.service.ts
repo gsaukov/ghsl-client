@@ -17,18 +17,16 @@ import {Vector} from "ol/layer";
 import {DataService} from "./data.service";
 
 const style = {
-  'stroke-color': ['*', ['get', 'COLOR'], [220, 220, 220]],
-  'stroke-width': 2,
-  'stroke-offset': -1,
+  'stroke-color': ['*', ['get', 'COLOR'], [0, 0, 0, 0]],
+  'stroke-width': 0,
+  'stroke-offset': 0,
   'fill-color': ['*', ['get', 'COLOR'], [255, 255, 255, 0.6]],
 };
 
 class WebGLLayer extends Layer {
   // @ts-ignore
   createRenderer() {
-    return new WebGLVectorLayerRenderer(this, {
-      style,
-    });
+    return new WebGLVectorLayerRenderer(this, {style});
   }
 }
 
@@ -96,7 +94,7 @@ export class MapService {
     )
   }
 
-  loadJSON(response:any): Vector<VectorSource<Feature>>  {
+  loadJSON(response:any): WebGLLayer  {
     var jsonObject = JSON.parse(response);
 
     const top = jsonObject.metaData.topLeftCorner[0]; // lon
@@ -132,14 +130,17 @@ export class MapService {
               fromLonLat([leftTop[0], leftTop[1]]),
             ]])
           });
-          squareFeature.setStyle(this.getStyle(pixel));
+          squareFeature.setProperties({
+            "COLOR": "#C48832",
+          })
+          // squareFeature.setStyle(this.getStyle(pixel));
           squares.push(squareFeature)
         }
       }
     }
 
     // Create a vector layer to display the square
-    const vectorLayer = new Vector({
+    const vectorLayer = new WebGLLayer({
       source: new VectorSource({
         features: squares
       }),
