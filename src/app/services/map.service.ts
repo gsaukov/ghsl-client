@@ -12,8 +12,9 @@ import VectorSource from 'ol/source/Vector';
 import WebGLVectorLayerRenderer from 'ol/renderer/webgl/VectorLayer';
 import {Fill, Stroke, Style} from "ol/style";
 import {Feature} from "ol";
-import { Polygon } from 'ol/geom';
+import {Polygon} from 'ol/geom';
 import {Vector} from "ol/layer";
+import {DataService} from "./data.service";
 
 const style = {
   'stroke-color': ['*', ['get', 'COLOR'], [220, 220, 220]],
@@ -38,7 +39,7 @@ export class MapService {
 
   private map!: Map;
 
-  constructor() {
+  constructor(private dataService:DataService) {
   }
 
   buildMap(): Observable<Map> {
@@ -62,10 +63,11 @@ export class MapService {
                 '<a href="https://www.openstreetmap.org/copyright" target="_blank" style="color:blue;">OpenStreetMap</a> contributors',
             }),
           }),
-          this.getDefaultVectorLayer()
+          // this.getDefaultVectorLayer()
         ],
         target: 'ol-map',
       });
+      this.getGhslVectorLayer()
       observer.next(this.map = map);
       observer.complete();
     });
@@ -85,7 +87,16 @@ export class MapService {
     return vectorLayer
   }
 
-  loadJSON(response:any) {
+  getGhslVectorLayer() {
+    this.dataService.getData('GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20_int.json').subscribe(
+      res => {
+        const layer = this.loadJSON(res)
+        this.map.addLayer(layer);
+      }
+    )
+  }
+
+  loadJSON(response:any): Vector<VectorSource<Feature>>  {
     var jsonObject = JSON.parse(response);
 
     const top = jsonObject.metaData.topLeftCorner[0]; // lon
@@ -133,6 +144,8 @@ export class MapService {
         features: squares
       }),
     });
+
+    return vectorLayer;
   }
 
   getStyle(num:number) {
