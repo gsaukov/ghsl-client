@@ -7,7 +7,7 @@ import {Feature as TurfFeature, FeatureCollection as TurfFeatureCollection, Mult
 @Injectable({
   providedIn: 'root'
 })
-export class MapService {
+export class CalculationService {
 
   private map!: Map;
 
@@ -19,8 +19,8 @@ export class MapService {
     const left = jsonObject.metaData.topLeftCorner[1]; // lat
     const bottom = jsonObject.metaData.bottomRightCorner[0]; // lon
     const right = jsonObject.metaData.bottomRightCorner[1]; // lat
-    const height = jsonObject.metaData.pixelHeightDegrees;
-    const width = jsonObject.metaData.pixelWidthDegrees;
+    const height = jsonObject.metaData.pixelHeightDegrees * 1.001;
+    const width = jsonObject.metaData.pixelWidthDegrees * 1.001;
     const rows = jsonObject.metaData.areaWidth
     const cols = jsonObject.metaData.areaHeight
     const data = jsonObject.data.res
