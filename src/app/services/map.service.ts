@@ -13,7 +13,6 @@ import WebGLVectorLayerRenderer from 'ol/renderer/webgl/VectorLayer';
 import {Fill, Stroke, Style} from "ol/style";
 import {Feature} from "ol";
 import {Polygon} from 'ol/geom';
-import {Vector} from "ol/layer";
 import {DataService} from "./data.service";
 import {CalculationService} from "./calculation.service";
 
@@ -52,7 +51,7 @@ export class MapService {
           units: 'metric',
         })]),
         view: new View({
-          center: fromLonLat([69.2787079, 41.3123363], 'EPSG:3857'),
+          center: fromLonLat([10.40041664, 48.77458333], 'EPSG:3857'),
           zoom: 12,
         }),
         layers: [
@@ -89,9 +88,9 @@ export class MapService {
   getGhslVectorLayer() {
     this.dataService.getData('GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20_int.json').subscribe(
       res => {
-        // const layer = this.loadJSON(res)
-        this.calculationService.loadTurfJSON(res)
-        // this.map.addLayer(layer);
+        const layer = this.loadJSON(res)
+        // const layer = this.calculationService.loadTurfJSON(res)
+        this.map.addLayer(layer);
       }
     )
   }
@@ -108,14 +107,14 @@ export class MapService {
     const rows = jsonObject.metaData.areaWidth
     const cols = jsonObject.metaData.areaHeight
     const data = jsonObject.data.res
-    const squares = []
+    const squares: Feature[] = []
     let olCenter
 
     const center = [top, left];
     olCenter = fromLonLat(center);
 
-    for (let i = 0; i < 1200; i++) {
-      for (let j = 0; j < 1200; j++) {
+    for (let i = 0; i < 50; i++) {
+      for (let j = 0; j < 50; j++) {
         const pixel = data[(i * cols) + j]
         if (pixel > 0) {
           let verticalPos = top + (j * height);
@@ -140,14 +139,15 @@ export class MapService {
         }
       }
     }
+    return this.createLayer(squares);
+  }
 
-    // Create a vector layer to display the square
+  createLayer(feaures:Feature[]) {
     const vectorLayer = new WebGLLayer({
       source: new VectorSource({
-        features: squares
+        features: feaures
       }),
     });
-
     return vectorLayer;
   }
 
