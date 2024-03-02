@@ -88,8 +88,9 @@ export class MapService {
   getGhslVectorLayer() {
     this.dataService.getData('GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20_int.json').subscribe(
       res => {
-        const layer = this.loadJSON(res)
-        // const layer = this.calculationService.loadTurfJSON(res)
+        // const layer = this.loadJSON(res)
+        const layer = this.createLayer(this.calculationService.loadTurfJSON(res))
+        // console.log(layer)
         this.map.addLayer(layer);
       }
     )
