@@ -9,6 +9,8 @@ import {Fill, Stroke, Style} from "ol/style";
 })
 export class LayerService {
 
+  constructor() {
+  }
   createLayer(feaures:Feature[]) {
     const vectorLayer = new Vector({
       source: new VectorSource({

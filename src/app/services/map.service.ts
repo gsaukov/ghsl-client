@@ -15,20 +15,8 @@ import {Feature} from "ol";
 import {Polygon} from 'ol/geom';
 import {DataService} from "./data.service";
 import {CalculationService} from "./calculation.service";
-
-const style = {
-  'stroke-color': ['*', ['get', 'COLOR'], [0, 0, 0, 0]],
-  'stroke-width': 0,
-  'stroke-offset': 0,
-  'fill-color': ['*', ['get', 'COLOR'], [255, 255, 255, 0.6]],
-};
-
-class WebGLLayer extends Layer {
-  // @ts-ignore
-  createRenderer() {
-    return new WebGLVectorLayerRenderer(this, {style});
-  }
-}
+import {LayerService} from "./layer.service";
+import {WebGLLayer, WebGLLayerService} from "./webgl-layer.service";
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +25,8 @@ export class MapService {
 
   private map!: Map;
 
-  constructor(private dataService:DataService, private calculationService:CalculationService) {
+  constructor(private dataService: DataService, private calculationService: CalculationService,
+              private layerService: LayerService, private webglLayerService: WebGLLayerService) {
   }
 
   buildMap(): Observable<Map> {
@@ -75,22 +64,10 @@ export class MapService {
     return this.map;
   }
 
-  getDefaultVectorLayer() {
-    const vectorLayer = new WebGLLayer({
-      source: new VectorSource({
-        url: 'https://openlayers.org/data/vector/ecoregions.json',
-        format: new GeoJSON(),
-      }),
-    });
-    return vectorLayer
-  }
-
   getGhslVectorLayer() {
     this.dataService.getData('GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20_int.json').subscribe(
       res => {
-        // const layer = this.loadJSON(res)
-        const layer = this.createLayer(this.calculationService.loadTurfJSON(res))
-        // console.log(layer)
+        const layer = this.webglLayerService.createLayer(this.calculationService.loadTurfJSON(res))
         this.map.addLayer(layer);
       }
     )
@@ -140,47 +117,7 @@ export class MapService {
         }
       }
     }
-    return this.createLayer(squares);
+    return this.webglLayerService.createLayer(squares);
   }
 
-  createLayer(feaures:Feature[]) {
-    const vectorLayer = new WebGLLayer({
-      source: new VectorSource({
-        features: feaures
-      }),
-    });
-    return vectorLayer;
-  }
-
-  getStyle(num:number) {
-    let color
-
-    if(num < 10) {
-      color = 'rgba(0, 0, 255, 0.05)'
-    } else if (num < 50) {
-      color = 'rgba(0, 0, 255, 0.1)'
-    } else if (num < 100) {
-      color = 'rgba(0, 0, 255, 0.15)'
-    } else if (num < 200) {
-      color = 'rgba(0, 0, 255, 0.20)'
-    } else if (num < 300) {
-      color = 'rgba(0, 0, 255, 0.25)'
-    } else if (num < 500) {
-      color = 'rgba(0, 0, 255, 0.30)'
-    } else if (num < 1000) {
-      color = 'rgba(0, 0, 255, 0.40)'
-    } else if (num < 5000) {
-      color = 'rgba(0, 0, 255, 0.50)'
-    }else if (num > 5000) {
-      color = 'rgba(0, 0, 255, 0.60)'
-    }
-    return new Style({
-      fill: new Fill({
-        color: color
-      }),
-      stroke: new Stroke({
-        color: 'rgba(0, 0, 0, 0)'
-      })
-    });
-  }
 }
