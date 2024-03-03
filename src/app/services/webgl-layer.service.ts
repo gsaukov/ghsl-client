@@ -4,6 +4,9 @@ import Layer from 'ol/layer/Layer';
 import VectorSource from 'ol/source/Vector';
 import WebGLVectorLayerRenderer from 'ol/renderer/webgl/VectorLayer';
 import {Feature} from "ol";
+import {DataService} from "./data.service";
+import {CalculationService} from "./calculation.service";
+import {LayerService} from "./layer.service";
 
 const style = {
   'stroke-color': ['*', ['get', 'COLOR'], [0, 0, 0, 0]],
@@ -23,6 +26,9 @@ export class WebGLLayer extends Layer {
   providedIn: 'root'
 })
 export class WebGLLayerService {
+
+  constructor() {
+  }
 
   getDefaultVectorLayer() {
     const vectorLayer = new WebGLLayer({
