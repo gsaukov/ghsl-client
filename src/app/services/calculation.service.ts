@@ -3,6 +3,8 @@ import {fromLonLat} from "ol/proj";
 import * as turf from '@turf/turf';
 import {Feature as TurfFeature, FeatureCollection as TurfFeatureCollection, MultiPolygon as TurfMultiPolygon, Polygon as TurfPolygon} from "@turf/turf";
 import GeoJSON from "ol/format/GeoJSON";
+import {Feature} from "ol";
+import {Polygon} from "ol/geom";
 
 const ENL = 1.0001
 
@@ -13,6 +15,7 @@ export class CalculationService {
 
   constructor() {
   }
+
   loadTurfJSON(response:any) {
     var jsonObject = JSON.parse(response)
     const top = jsonObject.metaData.topLeftCorner[0] // lon
@@ -26,8 +29,8 @@ export class CalculationService {
     const data = jsonObject.data.res
     const squares:TurfFeature[] = []
 
-    for (let i = 0; i < 200; i++) {
-      for (let j = 0; j < 200; j++) {
+    for (let i = 200; i < 300; i++) {
+      for (let j = 200; j < 300; j++) {
         const pixel = data[(i * cols) + j]
         if (pixel > 0) {
           let verticalPos = top + (j * height)
@@ -56,6 +59,53 @@ export class CalculationService {
     })
     console.log(multiPolygonFeature.getGeometry())
     return [multiPolygonFeature]
+  }
+
+  loadJSON(response:any): Feature[]  {
+    var jsonObject = JSON.parse(response);
+
+    const top = jsonObject.metaData.topLeftCorner[0]; // lon
+    const left = jsonObject.metaData.topLeftCorner[1]; // lat
+    const bottom = jsonObject.metaData.bottomRightCorner[0]; // lon
+    const right = jsonObject.metaData.bottomRightCorner[1]; // lat
+    const height = jsonObject.metaData.pixelHeightDegrees;
+    const width = jsonObject.metaData.pixelWidthDegrees;
+    const rows = jsonObject.metaData.areaWidth
+    const cols = jsonObject.metaData.areaHeight
+    const data = jsonObject.data.res
+    const squares: Feature[] = []
+    let olCenter
+
+    const center = [top, left];
+    olCenter = fromLonLat(center);
+
+    for (let i = 0; i < 50; i++) {
+      for (let j = 0; j < 50; j++) {
+        const pixel = data[(i * cols) + j]
+        if (pixel > 0) {
+          let verticalPos = top + (j * height);
+          let hotizontalPos = left - (i * width);
+          const leftTop = [verticalPos, hotizontalPos];
+
+          // Create a square feature
+          const squareFeature = new Feature({
+            geometry: new Polygon([[
+              fromLonLat([leftTop[0], leftTop[1]]),
+              fromLonLat([leftTop[0], leftTop[1] - height]),
+              fromLonLat([leftTop[0] + width, leftTop[1] - height]),
+              fromLonLat([leftTop[0] + width, leftTop[1]]),
+              fromLonLat([leftTop[0], leftTop[1]]),
+            ]])
+          });
+          squareFeature.setProperties({
+            "COLOR": "#C48832",
+          })
+          // squareFeature.setStyle(this.getStyle(pixel));
+          squares.push(squareFeature)
+        }
+      }
+    }
+    return squares;
   }
 
 }
