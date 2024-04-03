@@ -42,10 +42,11 @@ export class ImageExtLayerService {
       imageCrop: [xmin,ymin,xmax,ymax],
       imageMask: imageMask,
       // imageRotate: Number($("#rotate").val()*Math.PI/180),
-      projection: 'EPSG:4326',
+      // projection: 'EPSG:4326',
     })
 
-    const geoImgLayer = new GeoImageLayer(geoImageSource, );
+    const geoImgLayer = new GeoImageLayer();
+    geoImgLayer.setSource(geoImageSource)
     map.addLayer(geoImgLayer)
 
     return geoImgLayer;
