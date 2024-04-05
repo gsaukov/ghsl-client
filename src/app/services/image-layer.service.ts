@@ -4,7 +4,15 @@ import ImageLayer from "ol/layer/Image";
 import ImageSource from 'ol/source/Image';
 import ImageObject from 'ol/Image'
 import Map from "ol/Map";
-import {Projection} from "ol/proj";
+import {fromLonLat, Projection} from "ol/proj";
+import {Icon, Stroke, Style} from "ol/style";
+import VectorSource from "ol/source/Vector";
+import VectorLayer from "ol/layer/Vector";
+import {Feature} from "ol";
+import {Point, Polygon} from "ol/geom";
+import Static from "ol/source/ImageStatic";
+import View from "ol/View";
+import {Vector} from "ol/layer";
 
 @Injectable({
   providedIn: 'root'
@@ -14,92 +22,134 @@ export class ImageLayerService {
   constructor() {
   }
 
-  createImageLayer(map: Map): ImageLayer<ImageStatic|ImageSource> {
-    const imageextent = //[9.992083316153526, 49.09958333862941, 19.992083276545834, 39.099583378875366];
-    [-180, -90, 180, 90]
-
-    // "topRightCorner": [
-    //   19.992083276545834,
-    //   49.09958333862941
-    // ],
-    //   "bottomLeftCorner": [
-    //   9.992083316153526,
-    //   39.099583378875366
-    // ],
-    //   "topLeftCorner": [
-    //   9.992083316153526,
-    //   49.09958333862941
-    // ],
-    //   "bottomRightCorner": [
-    //   19.992083276545834,
-    //   39.099583378875366
-    // ],
-
-    // Define the image path relative to your Angular assets folder
-    const imagePath = 'assets/GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20.png';
-
-
-    const imageStatic =  new ImageStatic({
-      url: 'assets/GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20.png',
-      imageExtent: imageextent,
-      projection: 'EPSG:4326',
-      crossOrigin: '',
-      // imageLoadFunction: imageLoadFunction,
+  createImageLayer(map: Map): ImageLayer<Static> {
+    let extent = [1584998.2185214162, 5816552.104388772, 1589890.1883316676, 5821444.074199023]
+    let projection = new Projection({code:'EPSG:3857'})
+    let imageStatic = new ImageStatic({
+      url: 'https://upload.wikimedia.org/wikipedia/commons/7/71/Black.png',
+      imageExtent: extent,
+      projection: projection,
+      // imageSize: [512, 512], // for some reason the image gets stretched to 513 x 512 when displayed
     })
 
-// Create an ImageSource instance
-    // @ts-ignore
-    const imageSource = new ImageSource({
-      loader: function(image, src) {
-        // image.getImage().src = src;
-        console.log("it loads me now")
-        return imageStatic.getImage(imageextent, 1200, 1200, new Projection({code:'EPSG:4326'})).getImage();
 
-      },
-      // url: imagePath,
-      // Assuming you know the image extent in the chosen projection (EPSG:4326 here)
-      // extent: [ /* Replace with your image extent values (e.g., [-180, -90, 180, 90]) */ ],
+    // static image
+    let imageLayer = new ImageLayer({
+      source: imageStatic,
+      opacity: 0.5
     });
 
-// Create an ImageLayer instance
-    const imageLayer2 = new ImageLayer({
-      source: imageSource,
-    });
+    // display extent as poly
+    let poly = new Polygon([
+      [
+        [extent[0], extent[3]],
+        [extent[0], extent[1]],
+        [extent[2], extent[1]],
+        [extent[2], extent[3]],
 
-    function imageLoadFunction(image: any, src: any) {
-      console.log("it loads me")
-    }
+      ]
+    ]);
 
-    let sst = new ImageLayer({
-      source : new ImageStatic({
-        imageExtent : imageextent,
-        // imageSize : [2408, 1166],
-        imageLoadFunction : function(image, src) {
-          // image.getImage().src = src;
-          console.log("it loads me now")
-        },
-        url :'myurl'
+    let vectorLayer = new VectorLayer({
+      source: new VectorSource({
+        wrapX: false,
+        // projection: projection,
       }),
-      map: map
+      style: new Style({
+        stroke: new Stroke({
+          color: 'rgba(255,0,0,1.0)',
+          width: 2,
+
+        })
+      })
     });
 
-// Creating a new image layer using my PNG image as a static source
-    const imageLayer = new ImageLayer({
-      source: new ImageStatic({
-        url: 'assets/GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20.png',
-        imageExtent: imageextent,
-        projection: 'EPSG:4326',
-        crossOrigin: '',
-        // imageLoadFunction: imageLoadFunction,
-      }),
-      minZoom: 0,
-      maxZoom: 20,
-      className: 'Image_Layer',
-      opacity: 0.5,
-      extent: imageextent,
-      // map: map  // This should add the image as an overlay
-    })
-    return imageLayer2;
+    vectorLayer.getSource()!.addFeature(
+      new Feature({
+        geometry: poly,
+      })
+    );
+
+    // create map
+    // let map = new ol.Map({
+    //   target: 'map',
+    //   layers: [
+    //     new ol.layer.Tile({
+    //       source: new ol.source.OSM()
+    //     }),
+    //     vectorLayer,
+    //     imageLayer
+    //
+    //   ],
+    //   view: new View({
+    //     center: [extent[2], extent[1]],
+    //     zoom: 18
+    //   })
+    // });
+
+    // source extents are still the same but they differ on the map
+    // console.log("poly: " + vectorLayer.getSource().getExtent());
+    map.addLayer(vectorLayer)
+    map.addLayer(imageLayer)
+    console.log("image: " + imageLayer.getSource()!.getImageExtent());
+
+
+
+
+
+
+
+
+
+//     const imageextent = fromLonLat([9.992083316153526, 49.09958333862941, 19.992083276545834, 39.099583378875366]);
+//     const extent = [0,0,1200,1200];
+//
+//     // "topRightCorner": [
+//     //   19.992083276545834,
+//     //   49.09958333862941
+//     // ],
+//     //   "bottomLeftCorner": [
+//     //   9.992083316153526,
+//     //   39.099583378875366
+//     // ],
+//     //   "topLeftCorner": [
+//     //   9.992083316153526,
+//     //   49.09958333862941
+//     // ],
+//     //   "bottomRightCorner": [
+//     //   19.992083276545834,
+//     //   39.099583378875366
+//     // ],
+//
+//     const projection = new Projection({
+//       code: 'EPSG:4326',
+//       units: 'pixels',
+//       extent: extent,
+//     });
+//
+// // Creating a new image layer using my PNG image as a static source
+//     const imageLayer = new ImageLayer({
+//       source: new ImageStatic({
+//         url: 'https://localhost:4200/assets/GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20_TEST.png',
+//         imageExtent: extent,
+//         // projection: projection,
+//       }),
+//       // minZoom: 0,
+//       // maxZoom: 20,
+//       // className: 'Image_Layer',
+//       // opacity: 0.5,
+//       extent: imageextent,
+//       map: map  // This should add the image as an overlay
+//     })
+
+
+
+    map.setView(new View({
+      center: [extent[2], extent[1]],
+      zoom: 18
+    }))
+
+    return imageLayer;
   }
 
 }
