@@ -23,13 +23,30 @@ export class ImageLayerService {
   }
 
   createImageLayer(map: Map): ImageLayer<Static> {
-    let extent = [1584998.2185214162, 5816552.104388772, 1589890.1883316676, 5821444.074199023]
-    let projection = new Projection({code:'EPSG:3857'})
+    // "topRightCorner": [
+    //   19.992083276545834,
+    //   49.09958333862941
+    // ],
+    //   "bottomLeftCorner": [
+    //   9.992083316153526,
+    //   39.099583378875366
+    // ],
+    //   "topLeftCorner": [
+    //   9.992083316153526,
+    //   49.09958333862941
+    // ],
+    //   "bottomRightCorner": [
+    //   19.992083276545834,
+    //   39.099583378875366
+    // ],
+
+    // An array of numbers representing an extent: [minx, miny, maxx, maxy].
+    let extent = [9.992083316153526, 39.099583378875366, 19.992083276545834, 49.09958333862941]
+    let projection = new Projection({code:'EPSG:4326'})
     let imageStatic = new ImageStatic({
-      url: 'https://upload.wikimedia.org/wikipedia/commons/7/71/Black.png',
+      url: 'https://localhost:4200/assets/GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20.png',
       imageExtent: extent,
       projection: projection,
-      // imageSize: [512, 512], // for some reason the image gets stretched to 513 x 512 when displayed
     })
 
 
@@ -70,83 +87,13 @@ export class ImageLayerService {
       })
     );
 
-    // create map
-    // let map = new ol.Map({
-    //   target: 'map',
-    //   layers: [
-    //     new ol.layer.Tile({
-    //       source: new ol.source.OSM()
-    //     }),
-    //     vectorLayer,
-    //     imageLayer
-    //
-    //   ],
-    //   view: new View({
-    //     center: [extent[2], extent[1]],
-    //     zoom: 18
-    //   })
-    // });
-
-    // source extents are still the same but they differ on the map
-    // console.log("poly: " + vectorLayer.getSource().getExtent());
     map.addLayer(vectorLayer)
     map.addLayer(imageLayer)
     console.log("image: " + imageLayer.getSource()!.getImageExtent());
 
-
-
-
-
-
-
-
-
-//     const imageextent = fromLonLat([9.992083316153526, 49.09958333862941, 19.992083276545834, 39.099583378875366]);
-//     const extent = [0,0,1200,1200];
-//
-//     // "topRightCorner": [
-//     //   19.992083276545834,
-//     //   49.09958333862941
-//     // ],
-//     //   "bottomLeftCorner": [
-//     //   9.992083316153526,
-//     //   39.099583378875366
-//     // ],
-//     //   "topLeftCorner": [
-//     //   9.992083316153526,
-//     //   49.09958333862941
-//     // ],
-//     //   "bottomRightCorner": [
-//     //   19.992083276545834,
-//     //   39.099583378875366
-//     // ],
-//
-//     const projection = new Projection({
-//       code: 'EPSG:4326',
-//       units: 'pixels',
-//       extent: extent,
-//     });
-//
-// // Creating a new image layer using my PNG image as a static source
-//     const imageLayer = new ImageLayer({
-//       source: new ImageStatic({
-//         url: 'https://localhost:4200/assets/GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20_TEST.png',
-//         imageExtent: extent,
-//         // projection: projection,
-//       }),
-//       // minZoom: 0,
-//       // maxZoom: 20,
-//       // className: 'Image_Layer',
-//       // opacity: 0.5,
-//       extent: imageextent,
-//       map: map  // This should add the image as an overlay
-//     })
-
-
-
     map.setView(new View({
       center: [extent[2], extent[1]],
-      zoom: 18
+      zoom: 6
     }))
 
     return imageLayer;
