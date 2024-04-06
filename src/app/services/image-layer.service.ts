@@ -1,18 +1,15 @@
 import {Injectable} from '@angular/core';
 import ImageStatic from "ol/source/ImageStatic";
 import ImageLayer from "ol/layer/Image";
-import ImageSource from 'ol/source/Image';
-import ImageObject from 'ol/Image'
 import Map from "ol/Map";
 import {fromLonLat, Projection} from "ol/proj";
-import {Icon, Stroke, Style} from "ol/style";
+import {Stroke, Style} from "ol/style";
 import VectorSource from "ol/source/Vector";
 import VectorLayer from "ol/layer/Vector";
 import {Feature} from "ol";
 import {Point, Polygon} from "ol/geom";
 import Static from "ol/source/ImageStatic";
 import View from "ol/View";
-import {Vector} from "ol/layer";
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +50,8 @@ export class ImageLayerService {
     // static image
     let imageLayer = new ImageLayer({
       source: imageStatic,
-      opacity: 0.5
+      className: 'ghsl-image'
+      // opacity: 0.5
     });
 
     // display extent as poly
@@ -92,7 +90,7 @@ export class ImageLayerService {
     console.log("image: " + imageLayer.getSource()!.getImageExtent());
 
     map.setView(new View({
-      center: [extent[2], extent[1]],
+      center: fromLonLat([extent[2], extent[1]]),
       zoom: 6
     }))
 
