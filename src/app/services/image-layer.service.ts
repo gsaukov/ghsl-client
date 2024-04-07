@@ -16,6 +16,8 @@ import View from "ol/View";
 })
 export class ImageLayerService {
 
+  //REWORK AS Sea Levels https://openlayers.org/en/latest/examples/sea-level.html
+
   constructor() {
   }
 
