@@ -46,6 +46,7 @@ export class ImageLayerService {
       url: 'https://localhost:4200/assets/GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0_R5_C20.png',
       imageExtent: extent,
       projection: projection,
+      interpolate: false, // when false displays pixels and do smooth/blurs images on zoom.
     })
 
 
