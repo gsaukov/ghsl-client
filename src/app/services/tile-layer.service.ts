@@ -81,11 +81,15 @@ export class TileLayerService {
 
   addPolygonsToMap(map:OlMap, polygonsMap: Map<string, Polygon>) {
     polygonsMap.forEach((value, key) => {
+      let hasNoLayer: boolean = true;
       map.getLayers().forEach(layer => {
-        if (!polygonsMap.has(layer.get(TileLayerService.ID))) { //if we already have layer from map no need to add it again.
-          this.addPolygonToMap(map, value)
+        if (polygonsMap.has(layer.get(TileLayerService.ID))) { //if we already have layer from map no need to add it again. Perhaps redundant check.
+          hasNoLayer = false;
         }
       });
+      if(hasNoLayer) {
+        this.addPolygonToMap(map, value)
+      }
     });
   }
 
