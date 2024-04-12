@@ -94,8 +94,7 @@ export class TileLayerService {
   }
 
   addPolygonToMap(map:OlMap, polygon:Polygon) {
-    const imageTile = this.imageLayerService.createImageLayer(polygon)
-    map.addLayer(imageTile)
+    this.imageLayerService.addImageLayerFromPolygon(map, polygon)
   }
 
   mapDifference(map1: Map<string, Polygon>, map2: Map<string, Polygon>): Map<string, Polygon> {
