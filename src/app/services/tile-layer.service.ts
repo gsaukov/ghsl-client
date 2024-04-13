@@ -4,6 +4,7 @@ import {transformExtent} from "ol/proj";
 import {Polygon} from "ol/geom";
 import {getBottomLeft, getBottomRight, getTopLeft, getTopRight} from "ol/extent"
 import {meta30ss} from "./metaData30ss"
+import {meta3ss} from "./metaData3ss"
 import {ImageLayerService} from "./image-layer.service";
 
 @Injectable({
@@ -11,7 +12,10 @@ import {ImageLayerService} from "./image-layer.service";
 })
 export class TileLayerService {
 
-  public static ID:string = "GHSL_ID";
+  public static readonly ID:string = "GHSL_ID";
+  public static readonly RES:string = "GHSL_RES";
+  public static readonly RES_3SS:string = "3ss";
+  public static readonly RES_30SS:string = "30ss";
 
   //check:
   // https://openlayers.org/en/latest/examples/sea-level.html
@@ -21,11 +25,15 @@ export class TileLayerService {
   // LAZY loading: https://stackoverflow.com/questions/77428955/openlayer-on-zooming-map-image-filter-get-only-visible-areas-on-map
 
   polygonsArray: Polygon[]
+  polygonsArray3ss: Polygon[]
+  polygonsArray30ss: Polygon[]
 
   visiblePolygonsMap: Map<string, Polygon> = new Map ();
 
   constructor(private imageLayerService:ImageLayerService) {
-    this.polygonsArray = this.getPolygons()
+    this.polygonsArray = this.getPolygons(TileLayerService.RES_30SS)
+    this.polygonsArray3ss = this.getPolygons(TileLayerService.RES_3SS)
+    this.polygonsArray30ss = this.getPolygons(TileLayerService.RES_30SS)
   }
 
   createTileLayer(map: OlMap) {
@@ -41,14 +49,12 @@ export class TileLayerService {
       const bl = getBottomLeft(extent);
       const br = getBottomRight(extent);
       const mapViewPolygon = new Polygon([[tl, tr, br, bl, tl]]);
+      const resolution = map.getView().getZoom()! > 11? TileLayerService.RES_3SS : TileLayerService.RES_30SS
+      console.log(resolution)
+      const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewPolygonsArray(resolution, mapViewPolygon);
 
-      const tempVisiblePolygonsMap: Map<string, Polygon> = new Map ();
-      this.polygonsArray.forEach(layerPolygon => {
-        const layerPolygonExtent = layerPolygon.getExtent()
-        if (mapViewPolygon.intersectsExtent(layerPolygonExtent)) {
-          tempVisiblePolygonsMap.set(layerPolygon.get(TileLayerService.ID), layerPolygon)
-        }
-      })
+      // ISSUE WITH POLYGON CLEANUP ON RESOLUTION CHANGE
+
       const toAddVisiblePolygonsMap: Map<string, Polygon> = this.mapDifference(tempVisiblePolygonsMap, this.visiblePolygonsMap)
       const toDeleteVisiblePolygonsMap: Map<string, Polygon> = this.mapDifference(this.visiblePolygonsMap, tempVisiblePolygonsMap)
       this.visiblePolygonsMap = new Map([...this.visiblePolygonsMap.entries(), ...toAddVisiblePolygonsMap.entries()])
@@ -57,15 +63,29 @@ export class TileLayerService {
     })
   }
 
-  getPolygons():Polygon[] {
+  getViewPolygonsArray(resolution: string, mapViewPolygon:Polygon): Map<string, Polygon> {
+    const tempVisiblePolygonsMap: Map<string, Polygon> = new Map ();
+    const polygonsArray = (resolution === TileLayerService.RES_30SS? this.polygonsArray30ss : this.polygonsArray3ss)
+    polygonsArray.forEach(layerPolygon => {
+      const layerPolygonExtent = layerPolygon.getExtent()
+      if (mapViewPolygon.intersectsExtent(layerPolygonExtent)) {
+        tempVisiblePolygonsMap.set(layerPolygon.get(TileLayerService.ID), layerPolygon)
+      }
+    })
+    return tempVisiblePolygonsMap;
+  }
+
+  getPolygons(resolution:string):Polygon[] {
     const polygons: Polygon[] = []
-    Object.keys(meta30ss).forEach(function(key){
-      const tl = meta30ss[key].topLeftCorner
-      const tr = meta30ss[key].topRightCorner
-      const bl = meta30ss[key].bottomLeftCorner
-      const br = meta30ss[key].bottomRightCorner
+    const meta = (resolution === TileLayerService.RES_30SS? meta30ss : meta3ss)
+    Object.keys(meta).forEach(function(key){
+      const tl = meta[key].topLeftCorner
+      const tr = meta[key].topRightCorner
+      const bl = meta[key].bottomLeftCorner
+      const br = meta[key].bottomRightCorner
       const polygon = new Polygon([[tl, tr, br, bl, tl]]);
       polygon.set(TileLayerService.ID, key)
+      polygon.set(TileLayerService.RES, resolution)
       polygons.push(polygon);
     });
     return polygons
