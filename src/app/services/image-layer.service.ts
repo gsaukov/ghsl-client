@@ -22,7 +22,7 @@ export class ImageLayerService {
 
   addImageLayerFromPolygon(map:OlMap, polygon: Polygon) {
     let extent = polygon.getExtent()
-    const url = `https://localhost:4200/assets/${polygon.get(TileLayerService.ID)}.png`
+    const url = `https://localhost:4200/assets/${polygon.get(TileLayerService.RES)}/${polygon.get(TileLayerService.ID)}.png`
     return this.addImageLayerFromExtentAndUrl(map, extent, url);
   }
 
@@ -39,7 +39,7 @@ export class ImageLayerService {
     let imageLayer = new ImageLayer({
       source: imageStatic,
       className: 'ghsl-image',
-      opacity: 1,
+      opacity: 0.6,
       visible: true,
       map: map
     });
