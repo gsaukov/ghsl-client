@@ -20,13 +20,13 @@ export class ImageLayerService {
   constructor() {
   }
 
-  addImageLayerFromPolygon(map:OlMap, polygon: Polygon) {
+  addImageLayerFromPolygon(map:OlMap, polygon: Polygon): ImageLayer<ImageStatic> {
     let extent = polygon.getExtent()
     const url = `https://localhost:4200/assets/${polygon.get(TileLayerService.RES)}/${polygon.get(TileLayerService.ID)}.png`
     return this.addImageLayerFromExtentAndUrl(map, extent, url);
   }
 
-  addImageLayerFromExtentAndUrl(map:OlMap, extent: Extent, url: string) {
+  addImageLayerFromExtentAndUrl(map:OlMap, extent: Extent, url: string): ImageLayer<ImageStatic> {
     let projection = new Projection({code:'EPSG:4326'})
     let imageStatic = new ImageStatic({
       url: url,
@@ -43,6 +43,8 @@ export class ImageLayerService {
       visible: true,
       map: map
     });
+
+    return imageLayer;
   }
 
 }
