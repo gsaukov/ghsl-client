@@ -6,6 +6,7 @@ import {getBottomLeft, getBottomRight, getTopLeft, getTopRight} from "ol/extent"
 import {meta30ss} from "./metaData30ss"
 import {meta3ss} from "./metaData3ss"
 import {ImageLayerService} from "./image-layer.service";
+import Layer from "ol/layer/Layer";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,7 @@ export class TileLayerService {
   polygonsArray30ss: Polygon[]
 
   visiblePolygonsMap: Map<string, Polygon> = new Map ();
+  visibleLayersMap: Map<string, Layer> = new Map ();
 
   constructor(private imageLayerService:ImageLayerService) {
     this.polygonsArray = this.getPolygons(TileLayerService.RES_30SS)
@@ -50,17 +52,20 @@ export class TileLayerService {
       const br = getBottomRight(extent);
       const mapViewPolygon = new Polygon([[tl, tr, br, bl, tl]]);
       const resolution = map.getView().getZoom()! > 11? TileLayerService.RES_3SS : TileLayerService.RES_30SS
-      console.log(resolution)
       const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewPolygonsArray(resolution, mapViewPolygon);
 
-      // ISSUE WITH POLYGON CLEANUP ON RESOLUTION CHANGE
+      // CLEAN THIS! KILL visiblePolygonsMap and work with visibleLayersMap
+      // Perhaps kill all refresh logic and properly attach unmanaged layer to the map in another promise.
 
       const toAddVisiblePolygonsMap: Map<string, Polygon> = this.mapDifference(tempVisiblePolygonsMap, this.visiblePolygonsMap)
       const toDeleteVisiblePolygonsMap: Map<string, Polygon> = this.mapDifference(this.visiblePolygonsMap, tempVisiblePolygonsMap)
       this.visiblePolygonsMap = new Map([...this.visiblePolygonsMap.entries(), ...toAddVisiblePolygonsMap.entries()])
+      toDeleteVisiblePolygonsMap.forEach((value, key) => {this.visiblePolygonsMap.delete(key)});
       this.deleteFromMap(map, toDeleteVisiblePolygonsMap)
       this.addPolygonsToMap(map, toAddVisiblePolygonsMap)
+      this.refreshVisibleLayer()
     })
+
   }
 
   getViewPolygonsArray(resolution: string, mapViewPolygon:Polygon): Map<string, Polygon> {
@@ -92,10 +97,17 @@ export class TileLayerService {
   }
 
   deleteFromMap(map:OlMap, polygonsMap: Map<string, Polygon>) {
-    map.getLayers().forEach(layer => {
-      if (layer && polygonsMap.has(layer.get(TileLayerService.ID))) {
-        map.removeLayer(layer);
+    polygonsMap.forEach((value, key) => {
+      if (this.visibleLayersMap.has(key)) {
+        this.visibleLayersMap.get(key)?.setMap(null)
+        this.visibleLayersMap.delete(key)
       }
+    });
+  }
+
+  refreshVisibleLayer() {
+    this.visibleLayersMap.forEach((value, key) => {
+        this.visibleLayersMap.get(key)?.changed()
     });
   }
 
@@ -114,7 +126,8 @@ export class TileLayerService {
   }
 
   addPolygonToMap(map:OlMap, polygon:Polygon) {
-    this.imageLayerService.addImageLayerFromPolygon(map, polygon)
+    const layer = this.imageLayerService.addImageLayerFromPolygon(map, polygon)
+    this.visibleLayersMap.set(polygon.get(TileLayerService.ID), layer)
   }
 
   mapDifference(map1: Map<string, Polygon>, map2: Map<string, Polygon>): Map<string, Polygon> {
@@ -127,4 +140,11 @@ export class TileLayerService {
     return difference;
   }
 
+  logKeys(map1: Map<string, Polygon>):string {
+    let res = ''
+    map1.forEach((value, key) => {
+      res = res + key + ' '
+    });
+    return res
+  }
 }
