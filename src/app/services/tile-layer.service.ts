@@ -3,6 +3,7 @@ import OlMap from "ol/Map";
 import {transformExtent} from "ol/proj";
 import {Polygon} from "ol/geom";
 import {getBottomLeft, getBottomRight, getTopLeft, getTopRight} from "ol/extent"
+import {meta90ss} from "./metaData90ss"
 import {meta30ss} from "./metaData30ss"
 import {meta3ss} from "./metaData3ss"
 import {ImageLayerService} from "./image-layer.service";
@@ -17,25 +18,19 @@ export class TileLayerService {
   public static readonly RES:string = "GHSL_RES";
   public static readonly RES_3SS:string = "3ss";
   public static readonly RES_30SS:string = "30ss";
+  public static readonly RES_90SS:string = "90ss";
 
-  //check:
-  // https://openlayers.org/en/latest/examples/sea-level.html
-  // https://stackoverflow.com/questions/57319221/how-to-create-custom-tiles-that-fit-on-a-certain-extent-openlayers5
-  // https://gis.stackexchange.com/questions/344604/openlayers-smoothly-change-tile-source-on-zoom
-  // https://gis.stackexchange.com/questions/234039/min-max-zoom-levels-for-a-tilelayer
-  // LAZY loading: https://stackoverflow.com/questions/77428955/openlayer-on-zooming-map-image-filter-get-only-visible-areas-on-map
-
-  polygonsArray: Polygon[]
   polygonsArray3ss: Polygon[]
   polygonsArray30ss: Polygon[]
+  polygonsArray90ss: Polygon[]
 
   visiblePolygonsMap: Map<string, Polygon> = new Map ();
   visibleLayersMap: Map<string, Layer> = new Map ();
 
   constructor(private imageLayerService:ImageLayerService) {
-    this.polygonsArray = this.getPolygons(TileLayerService.RES_30SS)
     this.polygonsArray3ss = this.getPolygons(TileLayerService.RES_3SS)
     this.polygonsArray30ss = this.getPolygons(TileLayerService.RES_30SS)
+    this.polygonsArray90ss = this.getPolygons(TileLayerService.RES_90SS)
   }
 
   createTileLayer(map: OlMap) {
@@ -51,7 +46,7 @@ export class TileLayerService {
       const bl = getBottomLeft(extent);
       const br = getBottomRight(extent);
       const mapViewPolygon = new Polygon([[tl, tr, br, bl, tl]]);
-      const resolution = map.getView().getZoom()! > 11? TileLayerService.RES_3SS : TileLayerService.RES_30SS
+      const resolution = this.chooseResolution(map.getView().getZoom()!)
       const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewPolygonsArray(resolution, mapViewPolygon);
 
       // CLEAN THIS! KILL visiblePolygonsMap and work with visibleLayersMap
@@ -64,13 +59,14 @@ export class TileLayerService {
       this.deleteFromMap(map, toDeleteVisiblePolygonsMap)
       this.addPolygonsToMap(map, toAddVisiblePolygonsMap)
       this.refreshVisibleLayer()
+      console.log(resolution)
     })
 
   }
 
   getViewPolygonsArray(resolution: string, mapViewPolygon:Polygon): Map<string, Polygon> {
     const tempVisiblePolygonsMap: Map<string, Polygon> = new Map ();
-    const polygonsArray = (resolution === TileLayerService.RES_30SS? this.polygonsArray30ss : this.polygonsArray3ss)
+    const polygonsArray = this.choosePolygonArray(resolution)
     polygonsArray.forEach(layerPolygon => {
       const layerPolygonExtent = layerPolygon.getExtent()
       if (mapViewPolygon.intersectsExtent(layerPolygonExtent)) {
@@ -82,7 +78,7 @@ export class TileLayerService {
 
   getPolygons(resolution:string):Polygon[] {
     const polygons: Polygon[] = []
-    const meta = (resolution === TileLayerService.RES_30SS? meta30ss : meta3ss)
+    const meta = this.chooseMeta(resolution)
     Object.keys(meta).forEach(function(key){
       const tl = meta[key].topLeftCorner
       const tr = meta[key].topRightCorner
@@ -138,6 +134,36 @@ export class TileLayerService {
       }
     });
     return difference;
+  }
+
+  chooseResolution(zoom:number):string {
+    if(zoom > 12) {
+      return TileLayerService.RES_3SS
+    } else if (zoom > 6) {
+      return TileLayerService.RES_30SS
+    } else {
+      return TileLayerService.RES_90SS
+    }
+  }
+
+  chooseMeta(resolution:string):any {
+    if(resolution === TileLayerService.RES_3SS) {
+      return meta3ss
+    } else if (resolution === TileLayerService.RES_30SS) {
+      return meta30ss
+    } else {
+      return meta90ss
+    }
+  }
+
+  choosePolygonArray(resolution:string):Polygon[] {
+    if(resolution === TileLayerService.RES_3SS) {
+      return this.polygonsArray3ss
+    } else if (resolution === TileLayerService.RES_30SS) {
+      return this.polygonsArray30ss
+    } else {
+      return this.polygonsArray90ss
+    }
   }
 
   logKeys(map1: Map<string, Polygon>):string {
