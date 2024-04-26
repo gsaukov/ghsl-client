@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import ImageStatic from "ol/source/ImageStatic";
 import ImageLayer from "ol/layer/Image";
-import {Projection} from "ol/proj";
+import {get} from "ol/proj";
 import {Polygon} from "ol/geom";
-import Static from "ol/source/ImageStatic";
 import {TileLayerService} from "./tile-layer.service";
 import {Extent} from "ol/extent";
 import OlMap from "ol/Map";
@@ -27,7 +26,7 @@ export class ImageLayerService {
   }
 
   addImageLayerFromExtentAndUrl(map:OlMap, extent: Extent, url: string): ImageLayer<ImageStatic> {
-    let projection = new Projection({code:'EPSG:4326'})
+    let projection = get('EPSG:4326')!
     let imageStatic = new ImageStatic({
       url: url,
       imageExtent: extent,
@@ -39,7 +38,7 @@ export class ImageLayerService {
     let imageLayer = new ImageLayer({
       source: imageStatic,
       className: 'ghsl-image',
-      opacity: 0.6,
+      opacity: 1,
       visible: true,
       map: map
     });
