@@ -7,12 +7,16 @@ import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import {RouterOutlet} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
+import {ToolbarComponent} from "./main-page/map-page/toolbar/toolbar.component";
+import {MatSliderModule} from '@angular/material/slider';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     MapPageComponent,
+    ToolbarComponent,
   ],
     imports: [
         BrowserModule,
@@ -20,8 +24,11 @@ import {AppRoutingModule} from "./app-routing.module";
         ReactiveFormsModule,
         RouterOutlet,
         AppRoutingModule,
+        MatSliderModule,
     ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent],
   schemas: []
 })
