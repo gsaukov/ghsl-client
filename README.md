@@ -1,27 +1,22 @@
-# GhslClient
+# Global Human Settlement Layer - Human Density layer client
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
+#### 3ss resolution sample:
+![3ss_sample.png](misc/3ss_sample.png)
 
-## Development server
+#### 30ss resolution sample:
+![30ss_sample.png](misc/30ss_sample.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#### 90ss resolution sample layer:
+![90ss_sample.png](misc/90ss_sample.png)
 
-## Code scaffolding
+### Data origin and license:
+[human-settlement.emergency.copernicus.eu](https://human-settlement.emergency.copernicus.eu/download.php?ds=pop)  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Useful links:
+https://www.maptiler.com/google-maps-coordinates-tile-bounds-projection/#9/-178.76/67.10  
+https://enonline.supermap.com/iServer9D/Subject_introduce/Cache/MapCache/TileFormat/ZXY_format.htm  
+https://openlayers.org/en/latest/examples/sea-level.html  
+https://stackoverflow.com/questions/57319221/how-to-create-custom-tiles-that-fit-on-a-certain-extent-openlayers5  
+https://gis.stackexchange.com/questions/344604/openlayers-smoothly-change-tile-source-on-zoom  
+https://gis.stackexchange.com/questions/234039/min-max-zoom-levels-for-a-tilelayer  
+LAZY loading: https://stackoverflow.com/questions/77428955/openlayer-on-zooming-map-image-filter-get-only-visible-areas-on-map  
