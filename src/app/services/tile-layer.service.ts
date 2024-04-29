@@ -49,7 +49,7 @@ export class TileLayerService {
       const resolution = this.chooseResolution(map.getView().getZoom()!)
       const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewPolygonsArray(resolution, mapViewPolygon);
 
-      // CLEAN THIS! KILL visiblePolygonsMap and work with visibleLayersMap
+      // CLEAN THIS!
       // Perhaps kill all refresh logic and properly attach unmanaged layer to the map in another promise.
 
       const toAddVisiblePolygonsMap: Map<string, Polygon> = this.mapDifference(tempVisiblePolygonsMap, this.visiblePolygonsMap)
@@ -58,8 +58,10 @@ export class TileLayerService {
       toDeleteVisiblePolygonsMap.forEach((value, key) => {this.visiblePolygonsMap.delete(key)});
       this.deleteFromMap(map, toDeleteVisiblePolygonsMap)
       this.addPolygonsToMap(map, toAddVisiblePolygonsMap)
-      this.refreshVisibleLayer()
-      console.log(resolution)
+
+      // Garbage collection and view tests :)
+      // console.log("p size:" + this.visiblePolygonsMap.size + " l size: " + this.visiblePolygonsMap.size)
+      // console.log(this.logKeys(this.visiblePolygonsMap))
     })
 
   }
@@ -98,12 +100,6 @@ export class TileLayerService {
         this.visibleLayersMap.get(key)?.setMap(null)
         this.visibleLayersMap.delete(key)
       }
-    });
-  }
-
-  refreshVisibleLayer() {
-    this.visibleLayersMap.forEach((value, key) => {
-        this.visibleLayersMap.get(key)?.changed()
     });
   }
 
@@ -166,9 +162,9 @@ export class TileLayerService {
     }
   }
 
-  logKeys(map1: Map<string, Polygon>):string {
+  logKeys(map: Map<string, Polygon>):string {
     let res = ''
-    map1.forEach((value, key) => {
+    map.forEach((value, key) => {
       res = res + key + ' '
     });
     return res
