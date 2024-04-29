@@ -4,7 +4,7 @@ import View from "ol/View";
 import {fromLonLat} from "ol/proj";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
-import {Observable} from "rxjs";
+import {mergeMap, Observable, of} from "rxjs";
 import {ScaleLine, defaults} from "ol/control";
 import {TileLayerService} from "./tile-layer.service";
 
@@ -18,11 +18,16 @@ export class MapService {
   constructor(private tileLayerService:TileLayerService) {
   }
 
-  buildMap(): Observable<Map> {
-    const osm = new TileLayer({
-      source: new OSM(),
-    });
+  build(): Observable<Map> {
+    return this.buildMap().pipe(
+      mergeMap((map) => {
+        this.applyGhslVectorLayer(map)
+        return of(map)
+      })
+    )
+  }
 
+  buildMap(): Observable<Map> {
     return new Observable((observer) => {
       const map = new Map({
         controls: defaults().extend([new ScaleLine({
@@ -40,23 +45,19 @@ export class MapService {
             }),
             visible: true
           }),
-          // this.getDefaultVectorLayer()
         ],
         target: 'ol-map',
       });
-      this.getGhslVectorLayer(map)
-      observer.next(this.map = map);
-      observer.complete();
+      observer.next(map)
     })
+  }
+
+  applyGhslVectorLayer(map: Map) {
+    this.tileLayerService.createTileLayer(map);
   }
 
   getMap(): Map {
     return this.map;
-  }
-
-  getGhslVectorLayer(map: Map) {
-    // this.imageLayerService.addImageLayerFromExtentAndUrl(map, [9.992083316153526, 29.099583419121316, 19.992083276545834, 59.09958329838346], 'https://localhost:4200/assets/concatenated.png');
-    this.tileLayerService.createTileLayer(map);
   }
 
 }
