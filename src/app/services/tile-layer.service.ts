@@ -37,7 +37,11 @@ export class TileLayerService {
     this.mapTiler(map)
   }
 
-  mapTiler (map: OlMap) {
+  getVisibleLayers(): Map<string, Layer> {
+    return this.visibleLayersMap
+  }
+
+  private mapTiler (map: OlMap) {
     map.on('moveend', () => {
       const mapExtent =  map.getView().calculateExtent(map.getSize());
       const extent = transformExtent(mapExtent, 'EPSG:3857', 'EPSG:4326');
@@ -66,7 +70,7 @@ export class TileLayerService {
 
   }
 
-  getViewPolygonsArray(resolution: string, mapViewPolygon:Polygon): Map<string, Polygon> {
+  private getViewPolygonsArray(resolution: string, mapViewPolygon:Polygon): Map<string, Polygon> {
     const tempVisiblePolygonsMap: Map<string, Polygon> = new Map ();
     const polygonsArray = this.choosePolygonArray(resolution)
     polygonsArray.forEach(layerPolygon => {
@@ -78,7 +82,7 @@ export class TileLayerService {
     return tempVisiblePolygonsMap;
   }
 
-  getPolygons(resolution:string):Polygon[] {
+  private getPolygons(resolution:string):Polygon[] {
     const polygons: Polygon[] = []
     const meta = this.chooseMeta(resolution)
     Object.keys(meta).forEach(function(key){
@@ -94,7 +98,7 @@ export class TileLayerService {
     return polygons
   }
 
-  deleteFromMap(map:OlMap, polygonsMap: Map<string, Polygon>) {
+  private deleteFromMap(map:OlMap, polygonsMap: Map<string, Polygon>) {
     polygonsMap.forEach((value, key) => {
       if (this.visibleLayersMap.has(key)) {
         this.visibleLayersMap.get(key)?.setMap(null)
@@ -103,7 +107,7 @@ export class TileLayerService {
     });
   }
 
-  addPolygonsToMap(map:OlMap, polygonsMap: Map<string, Polygon>) {
+  private addPolygonsToMap(map:OlMap, polygonsMap: Map<string, Polygon>) {
     polygonsMap.forEach((value, key) => {
       let hasNoLayer: boolean = true;
       map.getLayers().forEach(layer => {
@@ -117,12 +121,12 @@ export class TileLayerService {
     });
   }
 
-  addPolygonToMap(map:OlMap, polygon:Polygon) {
+  private addPolygonToMap(map:OlMap, polygon:Polygon) {
     const layer = this.imageLayerService.addImageLayerFromPolygon(map, polygon)
     this.visibleLayersMap.set(polygon.get(TileLayerService.ID), layer)
   }
 
-  mapDifference(map1: Map<string, Polygon>, map2: Map<string, Polygon>): Map<string, Polygon> {
+  private mapDifference(map1: Map<string, Polygon>, map2: Map<string, Polygon>): Map<string, Polygon> {
     const difference = new Map<string, Polygon>();
     map1.forEach((value, key) => {
       if (!map2.has(key)) {
@@ -132,7 +136,7 @@ export class TileLayerService {
     return difference;
   }
 
-  chooseResolution(zoom:number):string {
+  private chooseResolution(zoom:number):string {
     if(zoom > 12) {
       return TileLayerService.RES_3SS
     } else if (zoom > 6) {
@@ -142,7 +146,7 @@ export class TileLayerService {
     }
   }
 
-  chooseMeta(resolution:string):any {
+  private chooseMeta(resolution:string):any {
     if(resolution === TileLayerService.RES_3SS) {
       return meta3ss
     } else if (resolution === TileLayerService.RES_30SS) {
@@ -152,7 +156,7 @@ export class TileLayerService {
     }
   }
 
-  choosePolygonArray(resolution:string):Polygon[] {
+  private choosePolygonArray(resolution:string):Polygon[] {
     if(resolution === TileLayerService.RES_3SS) {
       return this.polygonsArray3ss
     } else if (resolution === TileLayerService.RES_30SS) {
@@ -162,7 +166,7 @@ export class TileLayerService {
     }
   }
 
-  logKeys(map: Map<string, Polygon>):string {
+  private logKeys(map: Map<string, Polygon>):string {
     let res = ''
     map.forEach((value, key) => {
       res = res + key + ' '
