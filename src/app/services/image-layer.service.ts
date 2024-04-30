@@ -16,7 +16,12 @@ import OlMap from "ol/Map";
 })
 export class ImageLayerService {
 
+  opacity:number
+  interpolate:boolean // when false displays pixels and true do smooth/blurs images on zoom.
+
   constructor() {
+    this.opacity = 1.0
+    this.interpolate = false
   }
 
   addImageLayerFromPolygon(map:OlMap, polygon: Polygon): ImageLayer<ImageStatic> {
@@ -32,18 +37,26 @@ export class ImageLayerService {
       imageExtent: extent,
       attributions: 'none',
       projection: projection,
-      interpolate: false, // when false displays pixels and do smooth/blurs images on zoom.
+      interpolate: this.interpolate,
     })
     // static image
     let imageLayer = new ImageLayer({
       source: imageStatic,
       className: 'ghsl-image',
-      opacity: 1,
+      opacity: this.opacity,
       visible: true,
       map: map
     });
 
     return imageLayer;
+  }
+
+  setOpacity(opacity:number) {
+    this.opacity = opacity
+  }
+
+  setInterpolate(interpolate:boolean) {
+    this.interpolate = interpolate
   }
 
 }
