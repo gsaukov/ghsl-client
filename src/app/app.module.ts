@@ -10,6 +10,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {ToolbarComponent} from "./main-page/map-page/toolbar/toolbar.component";
 import {MatSliderModule} from '@angular/material/slider';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatCheckbox} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
         RouterOutlet,
         AppRoutingModule,
         MatSliderModule,
+        MatCheckbox,
     ],
   providers: [
     provideAnimationsAsync()
