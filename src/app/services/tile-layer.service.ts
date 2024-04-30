@@ -41,6 +41,12 @@ export class TileLayerService {
     return this.visibleLayersMap
   }
 
+  refreshVisibleLayer() {
+    this.visibleLayersMap.forEach((value, key) => {
+      this.visibleLayersMap.get(key)?.changed()
+    });
+  }
+
   private mapTiler (map: OlMap) {
     map.on('moveend', () => {
       const mapExtent =  map.getView().calculateExtent(map.getSize());
