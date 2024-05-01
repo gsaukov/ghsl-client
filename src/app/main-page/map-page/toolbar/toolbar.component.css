@@ -5,3 +5,10 @@
   left: 4em;
 
 }
+
+mat-slider {
+  --mdc-slider-inactive-track-height: 5px;
+  --mdc-slider-handle-height: 10px;
+  --mdc-slider-handle-width: 10px;
+  --mdc-slider-inactive-track-shape: 10px;
+}
