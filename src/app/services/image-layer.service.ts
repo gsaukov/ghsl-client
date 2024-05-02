@@ -20,7 +20,7 @@ export class ImageLayerService {
   interpolate:boolean // when false displays pixels and true do smooth/blurs images on zoom.
 
   constructor() {
-    this.opacity = 1.0
+    this.opacity = 0.9
     this.interpolate = false
   }
 
