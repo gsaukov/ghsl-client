@@ -10,7 +10,7 @@ import {ImageLayerService} from "../../../services/image-layer.service";
 })
 export class ToolbarComponent {
 
-  constructor(private tileLayerService: TileLayerService, private imageLayerService: ImageLayerService) {
+  constructor(private tileLayerService: TileLayerService, public imageLayerService: ImageLayerService) {
   }
 
   applyOpacity(event: MatSliderDragEvent) {
