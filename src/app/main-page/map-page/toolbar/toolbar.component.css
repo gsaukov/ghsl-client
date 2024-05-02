@@ -1,14 +1,31 @@
 .toolbar-container {
   position: absolute;
-  width: 50%;
-  min-width: 52rem;
+  width: 40%;
+  min-width: 30em;
   left: 4em;
-
+  border-radius: 30px;
+  background-color: rgb(67, 67, 110, 0.65);
+  color: white;
 }
 
+/*Opacity Slider styles*/
 mat-slider {
-  --mdc-slider-inactive-track-height: 5px;
-  --mdc-slider-handle-height: 10px;
-  --mdc-slider-handle-width: 10px;
-  --mdc-slider-inactive-track-shape: 10px;
+  margin-left: 1em;
+
+  --mdc-slider-inactive-track-height: 0px;
+  --mdc-slider-active-track-height: 20px;
+  --mdc-slider-active-track-shape: 10px;
+  --mdc-slider-handle-height: 30px;
+  --mdc-slider-handle-width: 30px;
 }
+
+::ng-deep mat-slider .mdc-slider__track--active {
+  border: 1px solid white;
+}
+
+::ng-deep mat-slider .mdc-slider__thumb .mdc-slider__thumb-knob {
+  border: 1px solid white !important;
+}
+
+/*Opacity Slider styles*/
+

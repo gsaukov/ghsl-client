@@ -1,6 +1,8 @@
 <div class="toolbar-container">
-  <mat-slider min="0" max="1" step="0.05">
+  <mat-slider color="accent" min="0" max="1" step="0.05">
     <input matSliderThumb value="0.9" (dragEnd)="applyOpacity($event)">
   </mat-slider>
-  <mat-checkbox (change)="applyInterpolation($event.checked)">Interpolate</mat-checkbox>
+  <span>Opacity</span>
+  <mat-checkbox (change)="applyInterpolation($event.checked)"></mat-checkbox>
+  <span>Interpolate</span>
 </div>
