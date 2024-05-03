@@ -1,8 +1,8 @@
 <div class="toolbar-container">
-  <mat-slider color="accent" min="0" max="1" step="0.05">
+  <mat-slider id="opacity" color="accent" min="0" max="1" step="0.05">
     <input matSliderThumb value="{{imageLayerService.opacity}}" (dragEnd)="applyOpacity($event)">
   </mat-slider>
-  <span>Opacity</span>
-  <mat-checkbox (change)="applyInterpolation($event.checked)"></mat-checkbox>
-  <span>Interpolate</span>
+  <label for="opacity">Opacity</label>
+  <mat-checkbox id="interpolate" (change)="applyInterpolation($event.checked)"></mat-checkbox>
+  <label for="interpolate">Interpolate</label>
 </div>

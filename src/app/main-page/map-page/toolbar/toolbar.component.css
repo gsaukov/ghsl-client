@@ -1,17 +1,22 @@
 .toolbar-container {
   position: absolute;
-  width: 40%;
-  min-width: 30em;
+  /*width: 15%;*/
+  min-width: 22em;
   left: 4em;
+  top: 0.5em;
   border-radius: 30px;
   background-color: rgb(67, 67, 110, 0.65);
   color: white;
 }
 
+label {
+  vertical-align: middle;
+}
+
 /*Opacity Slider styles*/
 mat-slider {
-  margin-left: 1em;
-
+  margin-left: 1.2em;
+  margin-right: 1.2em;
   --mdc-slider-inactive-track-height: 0px;
   --mdc-slider-active-track-height: 20px;
   --mdc-slider-active-track-shape: 10px;
@@ -27,5 +32,12 @@ mat-slider {
   border: 1px solid white !important;
 }
 
-/*Opacity Slider styles*/
+/*Interpolation checkbox styles*/
 
+mat-checkbox {
+  margin-left: 0.5em;
+}
+
+::ng-deep mat-checkbox .mdc-checkbox__background {
+  border: 1px solid white !important;
+}
