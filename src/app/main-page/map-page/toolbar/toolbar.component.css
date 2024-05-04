@@ -32,6 +32,13 @@ mat-slider {
   border: 1px solid white !important;
 }
 
+::ng-deep .mdc-slider__thumb-knob {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
 /*Interpolation checkbox styles*/
 
 mat-checkbox {
