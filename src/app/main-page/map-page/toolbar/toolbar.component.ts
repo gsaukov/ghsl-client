@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, Renderer2, ViewChild} from '@angular/core';
 import {TileLayerService} from "../../../services/tile-layer.service";
-import {MatSliderDragEvent} from "@angular/material/slider";
+import {MatSlider, MatSliderDragEvent, MatSliderThumb} from "@angular/material/slider";
 import {ImageLayerService} from "../../../services/image-layer.service";
 
 @Component({
@@ -8,9 +8,16 @@ import {ImageLayerService} from "../../../services/image-layer.service";
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements AfterViewInit{
 
-  constructor(private tileLayerService: TileLayerService, public imageLayerService: ImageLayerService) {
+  @ViewChild(MatSlider) slider!: MatSlider;
+  @ViewChild(MatSliderThumb) thumb!: MatSliderThumb;
+
+  constructor(private tileLayerService: TileLayerService, private renderer: Renderer2, public imageLayerService: ImageLayerService) {
+  }
+
+  ngAfterViewInit(): void {
+    this.formatLabel()
   }
 
   applyOpacity(event: MatSliderDragEvent) {
@@ -30,6 +37,13 @@ export class ToolbarComponent {
         source.changed()
       }
     });
+  }
+
+  formatLabel() {
+    if(this.thumb) {
+      const knob = this.slider._getThumb(1)._hostElement.getElementsByClassName('mdc-slider__thumb-knob')[0]
+      this.renderer.setProperty(knob, 'textContent', this.thumb.value);
+    }
   }
 
 }
