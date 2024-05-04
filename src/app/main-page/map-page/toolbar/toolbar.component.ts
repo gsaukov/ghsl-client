@@ -42,7 +42,7 @@ export class ToolbarComponent implements AfterViewInit{
   formatLabel() {
     if(this.thumb) {
       const knob = this.slider._getThumb(1)._hostElement.getElementsByClassName('mdc-slider__thumb-knob')[0]
-      this.renderer.setProperty(knob, 'textContent', this.thumb.value);
+      this.renderer.setProperty(knob, 'textContent', Math.round(this.thumb.value * 100));
     }
   }
 
