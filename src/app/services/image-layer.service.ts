@@ -26,7 +26,7 @@ export class ImageLayerService {
 
   addImageLayerFromPolygon(map:OlMap, polygon: Polygon): ImageLayer<ImageStatic> {
     let extent = polygon.getExtent()
-    const url = `https://localhost:4200/assets/${polygon.get(TileLayerService.RES)}/${polygon.get(TileLayerService.ID)}.png`
+    const url = `https://raw.githubusercontent.com/gsaukov/ghsl-data/main/assets/${polygon.get(TileLayerService.RES)}/${polygon.get(TileLayerService.ID)}.png`
     return this.addImageLayerFromExtentAndUrl(map, extent, url);
   }
 
