@@ -20,3 +20,8 @@ https://stackoverflow.com/questions/57319221/how-to-create-custom-tiles-that-fit
 https://gis.stackexchange.com/questions/344604/openlayers-smoothly-change-tile-source-on-zoom  
 https://gis.stackexchange.com/questions/234039/min-max-zoom-levels-for-a-tilelayer  
 LAZY loading: https://stackoverflow.com/questions/77428955/openlayer-on-zooming-map-image-filter-get-only-visible-areas-on-map  
+
+### Build
+```
+ng build --configuration production --base-href https://gsaukov.github.io/ghsl-client/
+```
