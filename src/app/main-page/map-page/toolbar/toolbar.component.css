@@ -48,3 +48,10 @@ mat-checkbox {
 ::ng-deep mat-checkbox .mdc-checkbox__background {
   border: 1px solid white !important;
 }
+
+@media screen and (max-width: 600px) {
+  .toolbar-container {
+    transform: scale(0.9);
+    left: 2em;
+  }
+}
