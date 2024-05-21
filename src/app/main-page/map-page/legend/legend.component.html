@@ -1,0 +1,14 @@
+<mat-drawer-container class="legend-container" autosize>
+  <mat-drawer #drawer class="legend-content" mode="side">
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+
+  <div class="legend-control">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Legend
+    </button>
+  </div>
+
+</mat-drawer-container>

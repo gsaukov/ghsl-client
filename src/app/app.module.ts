@@ -11,6 +11,9 @@ import {ToolbarComponent} from "./main-page/map-page/toolbar/toolbar.component";
 import {MatSliderModule} from '@angular/material/slider';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatCheckbox} from "@angular/material/checkbox";
+import {LegendComponent} from "./main-page/map-page/legend/legend.component";
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import {MatCheckbox} from "@angular/material/checkbox";
     MainPageComponent,
     MapPageComponent,
     ToolbarComponent,
+    LegendComponent,
   ],
     imports: [
         BrowserModule,
@@ -27,6 +31,8 @@ import {MatCheckbox} from "@angular/material/checkbox";
         AppRoutingModule,
         MatSliderModule,
         MatCheckbox,
+        MatSidenavModule,
+        MatButtonModule
     ],
   providers: [
     provideAnimationsAsync()
