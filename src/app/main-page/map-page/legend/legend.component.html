@@ -1,8 +1,5 @@
 <mat-drawer-container class="legend-container" autosize>
   <mat-drawer #drawer class="legend-content" mode="side">
-<!--    <button (click)="showFiller = !showFiller" mat-raised-button>-->
-<!--      Toggle extra text-->
-<!--    </button>-->
     <table class="legend-table">
       <thead class="legend-table-header">
         <tr>
@@ -32,17 +29,17 @@
         <tr><td [ngStyle]="{'background-color':'#ff9e00',   'opacity':imageLayerService.opacity}">100k-200k</td></tr>    <!-- val: 1500.0 color: #ff9e00 value: 100k-200k-->
         <tr><td [ngStyle]="{'background-color':'#ffc300',   'opacity':imageLayerService.opacity}">200k+</td></tr>        <!-- val: 3000.0 color: #ffc300 value: 200k+-->
       </tbody>
-      <tfoot>
+      <tfoot class="legend-table-header">
         <tr>
-          <td>Total</td>
+          <td><a href="" target="_blank" style="color: white">About</a></td>
         </tr>
       </tfoot>
     </table>
   </mat-drawer>
 
-  <div class="legend-control">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Legend
+  <div class="{{isLegendOpen?'legend-control-closed':'legend-control'}}">
+    <button type="button" mat-button [disableRipple]="true" (click)="toggle()" style="width: 2em;">
+      {{isLegendOpen?'X':'Legend'}}
     </button>
   </div>
 

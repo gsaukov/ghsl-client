@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {ImageLayerService} from "../../../services/image-layer.service";
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-legend',
@@ -7,8 +8,15 @@ import {ImageLayerService} from "../../../services/image-layer.service";
   styleUrl: './legend.component.css'
 })
 export class LegendComponent {
-  showFiller = false;
+  @ViewChild('drawer') drawer!: MatDrawer;
+
+  isLegendOpen:boolean = false;
 
   constructor(public imageLayerService: ImageLayerService) {
+  }
+
+  toggle(){
+    this.drawer.toggle()
+    this.isLegendOpen = !this.isLegendOpen;
   }
 }

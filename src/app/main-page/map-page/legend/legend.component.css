@@ -9,7 +9,18 @@
 .legend-control {
   margin-left: 0.5em;
   background-color: rgb(67, 67, 110, 0.65);
-  border-radius: 30px;
+  border-radius: 20px;
+}
+
+.legend-control-closed {
+  margin-left: 0.7em;
+  background-color: rgb(67, 67, 110, 0.65);
+  border-radius: 20px;
+  width: 2.5em;
+  .mdc-button {
+    left: 0.65em;
+    min-width: 2em;
+  }
 }
 
 ::ng-deep .mat-drawer-inner-container {
@@ -17,6 +28,10 @@
 }
 
 ::ng-deep .mat-mdc-button-touch-target {
+  display: none !important;
+}
+
+::ng-deep.mdc-button__ripple {
   display: none !important;
 }
 
@@ -32,7 +47,8 @@
 
 .mdc-button, .mat-mdc-button {
   color: white !important;
-  border-radius: 30px;
+  font-size: 12px;
+  border-radius: 20px;
 }
 
 .legend-table {
