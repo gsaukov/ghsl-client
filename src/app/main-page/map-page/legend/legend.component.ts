@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ImageLayerService} from "../../../services/image-layer.service";
 
 @Component({
   selector: 'app-legend',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class LegendComponent {
   showFiller = false;
+
+  constructor(public imageLayerService: ImageLayerService) {
+  }
 }
