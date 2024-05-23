@@ -8,6 +8,9 @@ import {mergeMap, Observable, of} from "rxjs";
 import {ScaleLine, defaults} from "ol/control";
 import {TileLayerService} from "./tile-layer.service";
 
+const DEFAULT_COORDINATE: number[] = [10.40041664, 48.77458333]
+const DEFAULT_ZOOM = 8
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +19,17 @@ export class MapService {
   private map!: Map;
 
   constructor(private tileLayerService:TileLayerService) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const view = new View({
+              center: fromLonLat([position.coords.longitude, position.coords.latitude]),
+              zoom: DEFAULT_ZOOM
+            });
+            this.map.setView(view)
+          },
+          () => {},
+          {timeout:10000})
+      }
   }
 
   build(): Observable<Map> {
@@ -34,8 +48,8 @@ export class MapService {
           units: 'metric',
         })]),
         view: new View({
-          center: fromLonLat([10.40041664, 48.77458333], 'EPSG:3857'),
-          zoom: 12,
+          center: fromLonLat(DEFAULT_COORDINATE, 'EPSG:3857'),
+          zoom: DEFAULT_ZOOM,
         }),
         layers: [
           new TileLayer({
@@ -49,6 +63,7 @@ export class MapService {
         ],
         target: 'ol-map',
       });
+      this.map = map
       observer.next(map)
     })
   }
