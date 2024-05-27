@@ -19,19 +19,45 @@ const DEFAULT_ZOOM = 8
 export class MapService {
 
   private map!: Map;
+  private defaultLayer: TileLayer<OSM>;
+  private darkLayer: TileLayer<StadiaMaps>;
 
   constructor(private tileLayerService:TileLayerService) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            const view = new View({
-              center: fromLonLat([position.coords.longitude, position.coords.latitude]),
-              zoom: DEFAULT_ZOOM
-            });
-            this.map.setView(view)
-          },
-          () => {},
-          {timeout:10000})
-      }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const view = new View({
+          center: fromLonLat([position.coords.longitude, position.coords.latitude]),
+          zoom: DEFAULT_ZOOM
+        });
+        this.map.setView(view)
+        },
+        () => {},
+        {timeout:10000})
+    }
+
+    const attributions = '<a href="https://gsaukov.netlify.app/" target="_blank" style="color:blue;">Georgy Saukov</a> ' +
+      '| <a href="https://human-settlement.emergency.copernicus.eu/download.php?ds=pop" target="_blank" style="color:blue;">GHSL Data</a> ' +
+      '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" style="color:blue;">OpenStreetMap</a> contributors'
+
+    this.defaultLayer = new TileLayer({
+      source: new OSM({
+        attributions: attributions
+      }),
+      visible: true
+    })
+
+    const stadiaMaps = new StadiaMaps({
+      layer: 'alidade_smooth_dark',
+      retina: true,
+      // apiKey: 'OPTIONAL'
+    })
+
+    stadiaMaps.setAttributions(attributions)
+
+    this.darkLayer = new TileLayer({
+      source: stadiaMaps,
+      visible: true
+    })
   }
 
   build(): Observable<Map> {
@@ -45,30 +71,6 @@ export class MapService {
 
   buildMap(): Observable<Map> {
     return new Observable((observer) => {
-      const attributions = '<a href="https://gsaukov.netlify.app/" target="_blank" style="color:blue;">Georgy Saukov</a> ' +
-          '| <a href="https://human-settlement.emergency.copernicus.eu/download.php?ds=pop" target="_blank" style="color:blue;">GHSL Data</a> ' +
-          '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" style="color:blue;">OpenStreetMap</a> contributors'
-
-      const defaultLayer = new TileLayer({
-        source: new OSM({
-          attributions: attributions
-        }),
-        visible: true
-      })
-
-      const stadiaMaps = new StadiaMaps({
-        layer: 'alidade_smooth_dark',
-        retina: true,
-        // apiKey: 'OPTIONAL'
-      })
-
-      stadiaMaps.setAttributions(attributions)
-
-      const darkLayer = new TileLayer({
-        source: stadiaMaps,
-        visible: true
-      })
-
       const map = new Map({
         controls: defaults().extend([new ScaleLine({
           units: 'metric',
@@ -78,13 +80,23 @@ export class MapService {
           zoom: DEFAULT_ZOOM,
         }),
         layers: [
-          darkLayer
+          this.defaultLayer
         ],
         target: 'ol-map',
       });
       this.map = map
       observer.next(map)
     })
+  }
+
+  setDarkBaseLayer() {
+    this.map.removeLayer(this.defaultLayer)
+    this.map.addLayer(this.darkLayer)
+  }
+
+  setDefaultBaseLayer() {
+    this.map.removeLayer(this.darkLayer)
+    this.map.addLayer(this.defaultLayer)
   }
 
   applyGhslVectorLayer(map: Map) {
