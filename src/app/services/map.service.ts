@@ -7,11 +7,11 @@ import OSM from "ol/source/OSM";
 import {mergeMap, Observable, of} from "rxjs";
 import {ScaleLine, defaults} from "ol/control";
 import {TileLayerService} from "./tile-layer.service";
-import Tile from 'ol/layer/Tile';
-import StadiaMaps from 'ol/source/StadiaMaps';
 
 const DEFAULT_COORDINATE: number[] = [10.40041664, 48.77458333]
 const DEFAULT_ZOOM = 8
+const DEFAULT_OSM_MAP = 'default-osm-map'
+const DARK_OSM_MAP = 'dark-osm-map'
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,6 @@ export class MapService {
 
   private map!: Map;
   private defaultLayer: TileLayer<OSM>;
-  private darkLayer: TileLayer<StadiaMaps>;
 
   constructor(private tileLayerService:TileLayerService) {
     if (navigator.geolocation) {
@@ -37,28 +36,15 @@ export class MapService {
 
     const attributions = '<a href="https://gsaukov.netlify.app/" target="_blank" style="color:blue;">Georgy Saukov</a> ' +
       '| <a href="https://human-settlement.emergency.copernicus.eu/download.php?ds=pop" target="_blank" style="color:blue;">GHSL Data</a> ' +
-      ' &copy; <a href="https://www.stadiamaps.com/" target="_blank" style="color:blue;">Stadia Maps</a>'  +
-      '<br> &copy; <a href="https://openmaptiles.org/" target="_blank" style="color:blue;">OpenMapTiles</a>' +
-      ' &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" style="color:blue;">OpenStreetMap</a> contributors'
+      '<br>' +
+      '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" style="color:blue;">OpenStreetMap</a> contributors'
 
     this.defaultLayer = new TileLayer({
       source: new OSM({
-        attributions: attributions
+        attributions: attributions,
       }),
-      visible: true
-    })
-
-    const stadiaMaps = new StadiaMaps({
-      layer: 'alidade_smooth_dark',
-      retina: true,
-      // apiKey: 'OPTIONAL'
-    })
-
-    stadiaMaps.setAttributions(attributions)
-
-    this.darkLayer = new TileLayer({
-      source: stadiaMaps,
-      visible: true
+      className: DEFAULT_OSM_MAP,
+      visible: true,
     })
   }
 
@@ -92,13 +78,14 @@ export class MapService {
   }
 
   setDarkBaseLayer() {
-    this.map.removeLayer(this.defaultLayer)
-    this.map.addLayer(this.darkLayer)
+    const mapLayer: Element = document.getElementsByClassName(DEFAULT_OSM_MAP)[0];
+    //filter: grayscale(80%) invert(100%) hue-rotate(180deg)
+    mapLayer.className = DARK_OSM_MAP
   }
 
   setDefaultBaseLayer() {
-    this.map.removeLayer(this.darkLayer)
-    this.map.addLayer(this.defaultLayer)
+    const mapLayer: Element = document.getElementsByClassName(DARK_OSM_MAP)[0];
+    mapLayer.className = DEFAULT_OSM_MAP
   }
 
   applyGhslVectorLayer(map: Map) {

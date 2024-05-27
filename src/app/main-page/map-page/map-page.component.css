@@ -5,3 +5,7 @@
   bottom: 0;
   right: 0;
 }
+
+::ng-deep .dark-osm-map {
+  filter: grayscale(90%) invert(100%) hue-rotate(180deg);
+}
