@@ -2,6 +2,7 @@ import {AfterViewInit, Component, Renderer2, ViewChild} from '@angular/core';
 import {TileLayerService} from "../../../services/tile-layer.service";
 import {MatSlider, MatSliderDragEvent, MatSliderThumb} from "@angular/material/slider";
 import {ImageLayerService} from "../../../services/image-layer.service";
+import {MapService} from "../../../services/map.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -13,7 +14,8 @@ export class ToolbarComponent implements AfterViewInit{
   @ViewChild(MatSlider) slider!: MatSlider;
   @ViewChild(MatSliderThumb) thumb!: MatSliderThumb;
 
-  constructor(private tileLayerService: TileLayerService, private renderer: Renderer2, public imageLayerService: ImageLayerService) {
+  constructor(private mapService: MapService, private tileLayerService: TileLayerService,
+              private renderer: Renderer2, public imageLayerService: ImageLayerService) {
   }
 
   ngAfterViewInit(): void {
@@ -37,6 +39,14 @@ export class ToolbarComponent implements AfterViewInit{
         source.changed()
       }
     });
+  }
+
+  setDarkMode(isDarkMode: boolean) {
+    if(isDarkMode) {
+      this.mapService.setDarkBaseLayer()
+    } else {
+      this.mapService.setDefaultBaseLayer()
+    }
   }
 
   formatLabel() {
