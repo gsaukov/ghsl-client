@@ -69,9 +69,9 @@ td {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black !important;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 720px) {
   .legend-container {
-    transform: scale(0.9);
+    transform: scale(0.7);
     top: 5em;
   }
 }

@@ -49,9 +49,9 @@ mat-checkbox {
   border: 1px solid white !important;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 720px) {
   .toolbar-container {
     transform: scale(0.7);
-    left: 0em !important;
+    left: -1em;
   }
 }
