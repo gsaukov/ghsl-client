@@ -37,7 +37,9 @@ export class MapService {
 
     const attributions = '<a href="https://gsaukov.netlify.app/" target="_blank" style="color:blue;">Georgy Saukov</a> ' +
       '| <a href="https://human-settlement.emergency.copernicus.eu/download.php?ds=pop" target="_blank" style="color:blue;">GHSL Data</a> ' +
-      '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" style="color:blue;">OpenStreetMap</a> contributors'
+      ' &copy; <a href="https://www.stadiamaps.com/" target="_blank" style="color:blue;">Stadia Maps</a>'  +
+      '<br> &copy; <a href="https://openmaptiles.org/" target="_blank" style="color:blue;">OpenMapTiles</a>' +
+      ' &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" style="color:blue;">OpenStreetMap</a> contributors'
 
     this.defaultLayer = new TileLayer({
       source: new OSM({
