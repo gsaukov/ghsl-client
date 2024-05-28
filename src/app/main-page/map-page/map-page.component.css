@@ -9,3 +9,9 @@
 ::ng-deep .dark-osm-map {
   filter: grayscale(90%) invert(100%) hue-rotate(180deg);
 }
+
+@media screen and (max-width: 720px) {
+  ::ng-deep .ol-zoom {
+    transform: scale(0.75);
+  }
+}
