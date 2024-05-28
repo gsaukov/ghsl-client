@@ -9,6 +9,12 @@ import {meta3ss} from "./metaData3ss"
 import {ImageLayerService} from "./image-layer.service";
 import Layer from "ol/layer/Layer";
 
+export enum GhslLayerResolution {
+  RES_3SS = "3ss",
+  RES_30SS = "30ss",
+  RES_90SS ="90ss"
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,9 +22,8 @@ export class TileLayerService {
 
   public static readonly ID:string = "GHSL_ID";
   public static readonly RES:string = "GHSL_RES";
-  public static readonly RES_3SS:string = "3ss";
-  public static readonly RES_30SS:string = "30ss";
-  public static readonly RES_90SS:string = "90ss";
+
+  public currentResolution!:GhslLayerResolution
 
   polygonsArray3ss: Polygon[]
   polygonsArray30ss: Polygon[]
@@ -28,9 +33,9 @@ export class TileLayerService {
   visibleLayersMap: Map<string, Layer> = new Map ();
 
   constructor(private imageLayerService:ImageLayerService) {
-    this.polygonsArray3ss = this.getPolygons(TileLayerService.RES_3SS)
-    this.polygonsArray30ss = this.getPolygons(TileLayerService.RES_30SS)
-    this.polygonsArray90ss = this.getPolygons(TileLayerService.RES_90SS)
+    this.polygonsArray3ss = this.getPolygons(GhslLayerResolution.RES_3SS)
+    this.polygonsArray30ss = this.getPolygons(GhslLayerResolution.RES_30SS)
+    this.polygonsArray90ss = this.getPolygons(GhslLayerResolution.RES_90SS)
   }
 
   createTileLayer(map: OlMap) {
@@ -58,6 +63,7 @@ export class TileLayerService {
       const mapViewPolygon = new Polygon([[tl, tr, br, bl, tl]]);
       const resolution = this.chooseResolution(map.getView().getZoom()!)
       const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewPolygonsArray(resolution, mapViewPolygon);
+      this.currentResolution = resolution;
 
       // CLEAN THIS!
       // Perhaps kill all refresh logic and properly attach unmanaged layer to the map in another promise.
@@ -76,7 +82,7 @@ export class TileLayerService {
 
   }
 
-  private getViewPolygonsArray(resolution: string, mapViewPolygon:Polygon): Map<string, Polygon> {
+  private getViewPolygonsArray(resolution: GhslLayerResolution, mapViewPolygon:Polygon): Map<string, Polygon> {
     const tempVisiblePolygonsMap: Map<string, Polygon> = new Map ();
     const polygonsArray = this.choosePolygonArray(resolution)
     polygonsArray.forEach(layerPolygon => {
@@ -142,30 +148,30 @@ export class TileLayerService {
     return difference;
   }
 
-  private chooseResolution(zoom:number):string {
+  private chooseResolution(zoom:number):GhslLayerResolution {
     if(zoom > 12) {
-      return TileLayerService.RES_3SS
+      return GhslLayerResolution.RES_3SS
     } else if (zoom > 6) {
-      return TileLayerService.RES_30SS
+      return GhslLayerResolution.RES_30SS
     } else {
-      return TileLayerService.RES_90SS
+      return GhslLayerResolution.RES_90SS
     }
   }
 
   private chooseMeta(resolution:string):any {
-    if(resolution === TileLayerService.RES_3SS) {
+    if(resolution === GhslLayerResolution.RES_3SS) {
       return meta3ss
-    } else if (resolution === TileLayerService.RES_30SS) {
+    } else if (resolution === GhslLayerResolution.RES_30SS) {
       return meta30ss
     } else {
       return meta90ss
     }
   }
 
-  private choosePolygonArray(resolution:string):Polygon[] {
-    if(resolution === TileLayerService.RES_3SS) {
+  private choosePolygonArray(resolution:GhslLayerResolution):Polygon[] {
+    if(resolution === GhslLayerResolution.RES_3SS) {
       return this.polygonsArray3ss
-    } else if (resolution === TileLayerService.RES_30SS) {
+    } else if (resolution === GhslLayerResolution.RES_30SS) {
       return this.polygonsArray30ss
     } else {
       return this.polygonsArray90ss
