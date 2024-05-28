@@ -1,5 +1,5 @@
 .toolbar-container {
-  position: absolute;
+  position: fixed;
   /*width: 15%;*/
   min-width: 30em;
   left: 4em;
@@ -51,7 +51,7 @@ mat-checkbox {
 
 @media screen and (max-width: 720px) {
   .toolbar-container {
-    transform: scale(0.7);
-    left: -1em;
+    transform: scale(0.65);
+    left: -2.5em;
   }
 }
