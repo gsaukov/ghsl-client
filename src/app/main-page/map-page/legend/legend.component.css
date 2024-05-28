@@ -72,8 +72,14 @@ td {
 @media screen and (max-width: 720px) {
   .legend-container {
     transform: scale(0.7);
-    top: 5em;
+    top: 4em;
+    left: -0.7em;
   }
+
+  .legend-content {
+    left: -0.5em;
+  }
+
 }
 
 
