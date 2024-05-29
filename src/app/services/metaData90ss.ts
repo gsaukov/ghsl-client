@@ -1,7 +1,5 @@
 export const meta90ss: any = {
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C1": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C1": {
     "topRightCorner": [
       -150.0079160501234,
       59.09958329838346
@@ -18,15 +16,8 @@ export const meta90ss: any = {
       -150.0079160501234,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C4": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C4": {
     "topRightCorner": [
       -60.00791640659262,
       59.09958329838346
@@ -43,15 +34,8 @@ export const meta90ss: any = {
       -60.00791640659262,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C5": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C5": {
     "topRightCorner": [
       -30.007916525415702,
       59.09958329838346
@@ -68,15 +52,8 @@ export const meta90ss: any = {
       -30.007916525415702,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C2": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C2": {
     "topRightCorner": [
       -120.00791616894648,
       59.09958329838346
@@ -93,15 +70,8 @@ export const meta90ss: any = {
       -120.00791616894648,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C3": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C3": {
     "topRightCorner": [
       -90.00791628776955,
       59.09958329838346
@@ -118,15 +88,8 @@ export const meta90ss: any = {
       -90.00791628776955,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980778,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C8": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C8": {
     "topRightCorner": [
       59.99208311811507,
       59.09958329838346
@@ -143,15 +106,8 @@ export const meta90ss: any = {
       59.99208311811507,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C9": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C9": {
     "topRightCorner": [
       89.992082999292,
       59.09958329838346
@@ -168,15 +124,8 @@ export const meta90ss: any = {
       89.992082999292,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980778,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C6": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C6": {
     "topRightCorner": [
       -0.00791664423876881,
       59.09958329838346
@@ -193,15 +142,8 @@ export const meta90ss: any = {
       -0.00791664423876881,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980785,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C7": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C7": {
     "topRightCorner": [
       29.992083236938136,
       59.09958329838346
@@ -218,15 +160,8 @@ export const meta90ss: any = {
       29.992083236938136,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C1": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C1": {
     "topRightCorner": [
       -150.0079160501234,
       -30.900416339402966
@@ -243,15 +178,8 @@ export const meta90ss: any = {
       -150.0079160501234,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C4": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C4": {
     "topRightCorner": [
       -60.00791640659262,
       -30.900416339402966
@@ -268,15 +196,8 @@ export const meta90ss: any = {
       -60.00791640659262,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C3": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C3": {
     "topRightCorner": [
       -90.00791628776955,
       89.0995831776456
@@ -293,15 +214,8 @@ export const meta90ss: any = {
       -90.00791628776955,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980778,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C9": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C9": {
     "topRightCorner": [
       89.992082999292,
       -30.900416339402966
@@ -318,15 +232,8 @@ export const meta90ss: any = {
       89.992082999292,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980778,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C4": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C4": {
     "topRightCorner": [
       -60.00791640659262,
       89.0995831776456
@@ -343,15 +250,8 @@ export const meta90ss: any = {
       -60.00791640659262,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C1": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C1": {
     "topRightCorner": [
       -150.0079160501234,
       89.0995831776456
@@ -368,15 +268,8 @@ export const meta90ss: any = {
       -150.0079160501234,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C2": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C2": {
     "topRightCorner": [
       -120.00791616894648,
       89.0995831776456
@@ -393,15 +286,8 @@ export const meta90ss: any = {
       -120.00791616894648,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C5": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C5": {
     "topRightCorner": [
       -30.007916525415702,
       -30.900416339402966
@@ -418,15 +304,8 @@ export const meta90ss: any = {
       -30.007916525415702,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C7": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C7": {
     "topRightCorner": [
       29.992083236938136,
       89.0995831776456
@@ -443,15 +322,8 @@ export const meta90ss: any = {
       29.992083236938136,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C6": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C6": {
     "topRightCorner": [
       -0.00791664423876881,
       -30.900416339402966
@@ -468,15 +340,8 @@ export const meta90ss: any = {
       -0.00791664423876881,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980785,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C8": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C8": {
     "topRightCorner": [
       59.99208311811507,
       89.0995831776456
@@ -493,15 +358,8 @@ export const meta90ss: any = {
       59.99208311811507,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C5": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C5": {
     "topRightCorner": [
       -30.007916525415702,
       89.0995831776456
@@ -518,15 +376,8 @@ export const meta90ss: any = {
       -30.007916525415702,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C7": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C7": {
     "topRightCorner": [
       29.992083236938136,
       -30.900416339402966
@@ -543,15 +394,8 @@ export const meta90ss: any = {
       29.992083236938136,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C6": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C6": {
     "topRightCorner": [
       -0.00791664423876881,
       89.0995831776456
@@ -568,15 +412,8 @@ export const meta90ss: any = {
       -0.00791664423876881,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980785,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C8": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C8": {
     "topRightCorner": [
       59.99208311811507,
       -30.900416339402966
@@ -593,15 +430,8 @@ export const meta90ss: any = {
       59.99208311811507,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C9": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C9": {
     "topRightCorner": [
       89.992082999292,
       89.0995831776456
@@ -618,15 +448,8 @@ export const meta90ss: any = {
       89.992082999292,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980778,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C10": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C10": {
     "topRightCorner": [
       119.9920828804689,
       89.0995831776456
@@ -643,15 +466,8 @@ export const meta90ss: any = {
       119.9920828804689,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C11": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C11": {
     "topRightCorner": [
       149.9920827616458,
       89.0995831776456
@@ -668,15 +484,8 @@ export const meta90ss: any = {
       149.9920827616458,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R1_C12": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R1_C12": {
     "topRightCorner": [
       180.00874930942342,
       89.0995831776456
@@ -693,15 +502,8 @@ export const meta90ss: any = {
       180.00874930942342,
       59.09958329838346
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.025013888789814635,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C3": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C3": {
     "topRightCorner": [
       -90.00791628776955,
       -0.900416460140832
@@ -718,15 +520,8 @@ export const meta90ss: any = {
       -90.00791628776955,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.024999999900980778,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C2": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C2": {
     "topRightCorner": [
       -120.00791616894648,
       -0.900416460140832
@@ -743,15 +538,8 @@ export const meta90ss: any = {
       -120.00791616894648,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C1": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C1": {
     "topRightCorner": [
       -150.0079160501234,
       -0.900416460140832
@@ -768,15 +556,8 @@ export const meta90ss: any = {
       -150.0079160501234,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C12": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C12": {
     "topRightCorner": [
       180.00874930942342,
       59.09958329838346
@@ -793,15 +574,8 @@ export const meta90ss: any = {
       180.00874930942342,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.025013888789814635,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C7": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C7": {
     "topRightCorner": [
       29.992083236938136,
       -0.900416460140832
@@ -818,15 +592,8 @@ export const meta90ss: any = {
       29.992083236938136,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C11": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C11": {
     "topRightCorner": [
       149.9920827616458,
       59.09958329838346
@@ -843,15 +610,8 @@ export const meta90ss: any = {
       149.9920827616458,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C6": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C6": {
     "topRightCorner": [
       -0.00791664423876881,
       -0.900416460140832
@@ -868,15 +628,8 @@ export const meta90ss: any = {
       -0.00791664423876881,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.024999999900980785,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C5": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C5": {
     "topRightCorner": [
       -30.007916525415702,
       -0.900416460140832
@@ -893,15 +646,8 @@ export const meta90ss: any = {
       -30.007916525415702,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R2_C10": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R2_C10": {
     "topRightCorner": [
       119.9920828804689,
       59.09958329838346
@@ -918,15 +664,8 @@ export const meta90ss: any = {
       119.9920828804689,
       29.099583419121316
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C4": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C4": {
     "topRightCorner": [
       -60.00791640659262,
       -0.900416460140832
@@ -943,15 +682,8 @@ export const meta90ss: any = {
       -60.00791640659262,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C9": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C9": {
     "topRightCorner": [
       89.992082999292,
       -0.900416460140832
@@ -968,15 +700,8 @@ export const meta90ss: any = {
       89.992082999292,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.024999999900980778,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C8": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C8": {
     "topRightCorner": [
       59.99208311811507,
       -0.900416460140832
@@ -993,15 +718,8 @@ export const meta90ss: any = {
       59.99208311811507,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C11": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C11": {
     "topRightCorner": [
       149.9920827616458,
       29.099583419121316
@@ -1018,15 +736,8 @@ export const meta90ss: any = {
       149.9920827616458,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C10": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C10": {
     "topRightCorner": [
       119.9920828804689,
       29.099583419121316
@@ -1043,15 +754,8 @@ export const meta90ss: any = {
       119.9920828804689,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C12": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C12": {
     "topRightCorner": [
       180.00874930942342,
       29.099583419121316
@@ -1068,15 +772,8 @@ export const meta90ss: any = {
       180.00874930942342,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.025013888789814635,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C12": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C12": {
     "topRightCorner": [
       180.00874930942342,
       -0.900416460140832
@@ -1093,15 +790,8 @@ export const meta90ss: any = {
       180.00874930942342,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.025013888789814635,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C11": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C11": {
     "topRightCorner": [
       149.9920827616458,
       -0.900416460140832
@@ -1118,15 +808,8 @@ export const meta90ss: any = {
       149.9920827616458,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R4_C10": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R4_C10": {
     "topRightCorner": [
       119.9920828804689,
       -0.900416460140832
@@ -1143,15 +826,8 @@ export const meta90ss: any = {
       119.9920828804689,
       -30.900416339402966
     ],
-    "pixelHeightDegrees": 0.024999999899385113,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C1": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C1": {
     "topRightCorner": [
       -150.0079160501234,
       29.099583419121316
@@ -1168,15 +844,8 @@ export const meta90ss: any = {
       -150.0079160501234,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C6": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C6": {
     "topRightCorner": [
       -0.00791664423876881,
       29.099583419121316
@@ -1193,15 +862,8 @@ export const meta90ss: any = {
       -0.00791664423876881,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.024999999900980785,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C5": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C5": {
     "topRightCorner": [
       -30.007916525415702,
       29.099583419121316
@@ -1218,15 +880,8 @@ export const meta90ss: any = {
       -30.007916525415702,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C4": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C4": {
     "topRightCorner": [
       -60.00791640659262,
       29.099583419121316
@@ -1243,15 +898,8 @@ export const meta90ss: any = {
       -60.00791640659262,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.02499999990098077,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C3": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C3": {
     "topRightCorner": [
       -90.00791628776955,
       29.099583419121316
@@ -1268,15 +916,8 @@ export const meta90ss: any = {
       -90.00791628776955,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.024999999900980778,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C9": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C9": {
     "topRightCorner": [
       89.992082999292,
       29.099583419121316
@@ -1293,15 +934,8 @@ export const meta90ss: any = {
       89.992082999292,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.024999999900980778,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C8": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C8": {
     "topRightCorner": [
       59.99208311811507,
       29.099583419121316
@@ -1318,15 +952,8 @@ export const meta90ss: any = {
       59.99208311811507,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R3_C7": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R3_C7": {
     "topRightCorner": [
       29.992083236938136,
       29.099583419121316
@@ -1343,15 +970,8 @@ export const meta90ss: any = {
       29.992083236938136,
       -0.9004164601408302
     ],
-    "pixelHeightDegrees": 0.024999999899385124,
-    "pixelWidthDegrees": 0.02499999990098076,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C11": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C11": {
     "topRightCorner": [
       149.9920827616458,
       -30.900416339402966
@@ -1368,15 +988,8 @@ export const meta90ss: any = {
       149.9920827616458,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C10": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C10": {
     "topRightCorner": [
       119.9920828804689,
       -30.900416339402966
@@ -1393,15 +1006,8 @@ export const meta90ss: any = {
       119.9920828804689,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.024999999900980754,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   },
-  "GHS_POP_E2025_GLOBE_R2023A_4326_90ss_V1_0_R5_C12": {
-    "areaWidth": 1200,
-    "areaHeight": 1200,
+  "90ss_V1_0_R5_C12": {
     "topRightCorner": [
       180.00874930942342,
       -30.900416339402966
@@ -1418,10 +1024,5 @@ export const meta90ss: any = {
       180.00874930942342,
       -60.90041621866511
     ],
-    "pixelHeightDegrees": 0.024999999899385117,
-    "pixelWidthDegrees": 0.025013888789814635,
-    "totalPixelCount": 0,
-    "totalPixelValue": 0,
-    "license": null
   }
 }

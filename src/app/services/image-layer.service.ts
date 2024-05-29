@@ -11,6 +11,8 @@ import OlMap from "ol/Map";
 // let extent = [9.992083316153526, 39.099583378875366, 19.992083276545834, 49.09958333862941]
 // let extent = [9.992083316153526, 29.099583419121316, 19.992083276545834, 59.09958329838346]
 
+const IMAGE_FILE_PREFIX = 'GHS_POP_E2025_GLOBE_R2023A_4326_'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +28,7 @@ export class ImageLayerService {
 
   addImageLayerFromPolygon(map:OlMap, polygon: Polygon): ImageLayer<ImageStatic> {
     let extent = polygon.getExtent()
-    const url = `https://raw.githubusercontent.com/gsaukov/ghsl-data/main/assets/${polygon.get(TileLayerService.RES)}/${polygon.get(TileLayerService.ID)}.png`
+    const url = `https://raw.githubusercontent.com/gsaukov/ghsl-data/main/assets/${polygon.get(TileLayerService.RES)}/${IMAGE_FILE_PREFIX}${polygon.get(TileLayerService.ID)}.png`
     return this.addImageLayerFromExtentAndUrl(map, extent, url);
   }
 
