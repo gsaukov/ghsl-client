@@ -99,9 +99,9 @@ export class TileLayerService {
     const meta = this.chooseMeta(resolution)
     Object.keys(meta).forEach(function(key){
       const tl = meta[key].topLeftCorner
-      const tr = meta[key].topRightCorner
-      const bl = meta[key].bottomLeftCorner
       const br = meta[key].bottomRightCorner
+      const tr = [tl[0],br[1]]
+      const bl = [br[0],tl[1]]
       const polygon = new Polygon([[tl, tr, br, bl, tl]]);
       polygon.set(TileLayerService.ID, key)
       polygon.set(TileLayerService.RES, resolution)
