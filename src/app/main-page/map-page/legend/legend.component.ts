@@ -2,6 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ImageLayerService} from "../../../services/image-layer.service";
 import {MatDrawer} from '@angular/material/sidenav';
 import {GhslLayerResolution, TileLayerService} from "../../../services/tile-layer.service";
+import { MatDialog } from '@angular/material/dialog';
+import {AboutComponent} from "./about/about.component";
 
 @Component({
   selector: 'app-legend',
@@ -13,7 +15,17 @@ export class LegendComponent {
 
   isLegendOpen:boolean = false;
 
-  constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService) {
+  constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService, public dialog: MatDialog) {
+  }
+
+  openAboutDialog(): void {
+    const dialogRef = this.dialog.open(AboutComponent, {
+      data: {name: "Title", animal: "Content"},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   toggle(){
