@@ -21,6 +21,7 @@ export class LegendComponent {
   openAboutDialog(): void {
     const dialogRef = this.dialog.open(AboutComponent, {
       data: {name: "Title", animal: "Content"},
+      backdropClass: 'overlay-background'
     });
 
     dialogRef.afterClosed().subscribe(result => {
