@@ -14,6 +14,13 @@ import {MatCheckbox} from "@angular/material/checkbox";
 import {LegendComponent} from "./main-page/map-page/legend/legend.component";
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose,
+} from '@angular/material/dialog';
+import {AboutComponent} from "./main-page/map-page/legend/about/about.component";
 
 @NgModule({
   declarations: [
@@ -22,6 +29,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MapPageComponent,
     ToolbarComponent,
     LegendComponent,
+    AboutComponent
   ],
     imports: [
         BrowserModule,
@@ -32,7 +40,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
         MatSliderModule,
         MatCheckbox,
         MatSidenavModule,
-        MatButtonModule
+        MatButtonModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose,
     ],
   providers: [
     provideAnimationsAsync()
