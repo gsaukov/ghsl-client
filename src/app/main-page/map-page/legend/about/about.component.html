@@ -1,8 +1,8 @@
 <h1 mat-dialog-title style="color: white">About this map.</h1>
 <mat-dialog-content>
-      <span> Hello and welcome to population density map!</span>
+      <span> Hello and welcome to 2025 population density map!</span>
       <span><br></span>
-      <span>Global Human Settlement Layer, or Population Density data comes originally from
+      <span>Global Human Settlement Layer, or Population Density map was built on original data that comes from
         <a class="dark-link" target="_blank" href="https://human-settlement.emergency.copernicus.eu/">human-settlement.emergency.copernicus.eu</a><br>
       </span>
       <span>Resolutions:</span>
@@ -11,10 +11,10 @@
         <li> 30ss files, on the other hand, are derived directly from the original images with a resolution of 30 arcseconds, with dimensions 1200x1200 pixels. These files undergo no transformation except for adjustments to the color scheme and conversion from TIFF to PNG format.</li>
         <li> 90ss files, they are created by combining and compressing 30ss files. Specifically, nine 30ss files arranged in a 3x3 grid are merged and compressed into a single 90ss file, maintaining a resolution of 1200x1200 pixels.</li>
       </ol>
-      <span> And of course these things are undone, but general concepts works and the application can be developed and tested further!<br></span>
+      <span> I <br></span>
       <span><br></span>
       <span>Georgy Saukov, 2024.<br></span>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onNoClick()" style="color: white">Ok</button>
+<mat-dialog-actions style="display: flex; justify-content: flex-end; right: 1em;">
+  <button mat-button (click)="onNoClick()" style="background: rgba(255,255,255,0.25); color: white; border-radius: 20px;">OK</button>
 </mat-dialog-actions>
