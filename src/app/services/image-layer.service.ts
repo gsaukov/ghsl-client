@@ -13,33 +13,46 @@ import OlMap from "ol/Map";
 
 const IMAGE_FILE_PREFIX = 'GHS_POP_E2025_GLOBE_R2023A_4326_'
 
+
+export interface LoadingLayer {
+  key: string;
+  timeMs: number;
+  loaded: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ImageLayerService {
-
+  loadingLayers:LoadingLayer[]
   opacity:number
   interpolate:boolean // when false displays pixels and true do smooth/blurs images on zoom.
 
   constructor() {
     this.opacity = 0.65
     this.interpolate = false
+    this.loadingLayers = []
   }
 
   addImageLayerFromPolygon(map:OlMap, polygon: Polygon): ImageLayer<ImageStatic> {
-    let extent = polygon.getExtent()
-    const url = `https://raw.githubusercontent.com/gsaukov/ghsl-data/main/assets/${polygon.get(TileLayerService.RES)}/${IMAGE_FILE_PREFIX}${polygon.get(TileLayerService.ID)}.png`
-    return this.addImageLayerFromExtentAndUrl(map, extent, url);
+    const extent = polygon.getExtent()
+    const key = `${IMAGE_FILE_PREFIX}${polygon.get(TileLayerService.ID)}`
+    const url = `https://raw.githubusercontent.com/gsaukov/ghsl-data/main/assets/${polygon.get(TileLayerService.RES)}/${key}.png`
+    return this.addImageLayerFromExtentAndUrl(map, extent, url, key);
   }
 
-  addImageLayerFromExtentAndUrl(map:OlMap, extent: Extent, url: string): ImageLayer<ImageStatic> {
+  addImageLayerFromExtentAndUrl(map:OlMap, extent: Extent, url: string, key: string): ImageLayer<ImageStatic> {
     let projection = get('EPSG:4326')!
+    const imageLoadFunctionWrapper = (image: any, src: any) => {
+      this.imageLoadingFunction(image, src, this.loadingLayers, key);
+    };
     let imageStatic = new ImageStatic({
       url: url,
       imageExtent: extent,
       attributions: 'none',
       projection: projection,
       interpolate: this.interpolate,
+      imageLoadFunction: imageLoadFunctionWrapper,
     })
     // static image
     let imageLayer = new ImageLayer({
@@ -59,6 +72,14 @@ export class ImageLayerService {
 
   setInterpolate(interpolate:boolean) {
     this.interpolate = interpolate
+  }
+
+  imageLoadingFunction(image: any, src: any, loadingLayers:LoadingLayer[], key: string) {
+    const execTime = new Date().getTime();
+    image.getImage().src = src;
+    image.getImage().onload = function(){
+      console.log(loadingLayers + " " +(new Date().getTime() - execTime) + "ms layer loaded: " + key)
+    }
   }
 
 }
