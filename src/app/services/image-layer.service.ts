@@ -6,6 +6,7 @@ import {Polygon} from "ol/geom";
 import {TileLayerService} from "./tile-layer.service";
 import {Extent} from "ol/extent";
 import OlMap from "ol/Map";
+import { timer } from 'rxjs';
 
 // An array of numbers representing an extent: [minx, miny, maxx, maxy].
 // let extent = [9.992083316153526, 39.099583378875366, 19.992083276545834, 49.09958333862941]
@@ -16,7 +17,7 @@ const IMAGE_FILE_PREFIX = 'GHS_POP_E2025_GLOBE_R2023A_4326_'
 
 export interface LoadingLayer {
   key: string;
-  timeMs: number;
+  timeMs?: number;
   loaded: boolean;
 }
 
@@ -24,14 +25,14 @@ export interface LoadingLayer {
   providedIn: 'root'
 })
 export class ImageLayerService {
-  loadingLayers:LoadingLayer[]
+  loadingLayers: Map<string, LoadingLayer>
   opacity:number
   interpolate:boolean // when false displays pixels and true do smooth/blurs images on zoom.
 
   constructor() {
     this.opacity = 0.65
     this.interpolate = false
-    this.loadingLayers = []
+    this.loadingLayers = new Map()
   }
 
   addImageLayerFromPolygon(map:OlMap, polygon: Polygon): ImageLayer<ImageStatic> {
@@ -44,7 +45,8 @@ export class ImageLayerService {
   addImageLayerFromExtentAndUrl(map:OlMap, extent: Extent, url: string, key: string): ImageLayer<ImageStatic> {
     let projection = get('EPSG:4326')!
     const imageLoadFunctionWrapper = (image: any, src: any) => {
-      this.imageLoadingFunction(image, src, this.loadingLayers, key);
+      const loadingLayer = this.imageLoadingFunction(image, src, key, this.loadingLayers);
+      this.loadingLayers.set(loadingLayer.key, loadingLayer)
     };
     let imageStatic = new ImageStatic({
       url: url,
@@ -62,7 +64,6 @@ export class ImageLayerService {
       visible: true,
       map: map
     });
-
     return imageLayer;
   }
 
@@ -74,12 +75,28 @@ export class ImageLayerService {
     this.interpolate = interpolate
   }
 
-  imageLoadingFunction(image: any, src: any, loadingLayers:LoadingLayer[], key: string) {
+  imageLoadingFunction(image: any, src: any, key: string, loadingLayers:Map<string, LoadingLayer>):LoadingLayer {
     const execTime = new Date().getTime();
+    const loadingLayer:LoadingLayer = {key: key, loaded:false}
     image.getImage().src = src;
     image.getImage().onload = function(){
-      console.log(loadingLayers + " " +(new Date().getTime() - execTime) + "ms layer loaded: " + key)
+      // console.log((new Date().getTime() - execTime) + "ms layer loaded: " + loadingLayer.key)
+      loadingLayer.loaded = true;
+      loadingLayer.timeMs = new Date().getTime() - execTime
+      removeFromLoadingLayersWithDelay(loadingLayer, loadingLayers)
     }
+    console.log(loadingLayers.size)
+    return loadingLayer;
   }
 
+}
+
+async function removeFromLoadingLayersWithDelay(loadingLayer:LoadingLayer, loadingLayers:Map<string, LoadingLayer>) {
+  await delay(2000);
+  loadingLayers.delete(loadingLayer.key)
+}
+
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+  // return timer(ms);
 }
