@@ -21,6 +21,7 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import {AboutComponent} from "./main-page/map-page/legend/about/about.component";
+import {ConsoleComponent} from "./main-page/map-page/console/console.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {AboutComponent} from "./main-page/map-page/legend/about/about.component"
     MapPageComponent,
     ToolbarComponent,
     LegendComponent,
-    AboutComponent
+    AboutComponent,
+    ConsoleComponent
   ],
     imports: [
         BrowserModule,
