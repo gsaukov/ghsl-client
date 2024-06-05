@@ -80,7 +80,6 @@ export class ImageLayerService {
     const loadingLayer:LoadingLayer = {key: key, loaded:false}
     image.getImage().src = src;
     image.getImage().onload = function(){
-      // console.log((new Date().getTime() - execTime) + "ms layer loaded: " + loadingLayer.key)
       loadingLayer.loaded = true;
       loadingLayer.timeMs = new Date().getTime() - execTime
       removeFromLoadingLayersWithDelay(loadingLayer, loadingLayers)
@@ -91,12 +90,6 @@ export class ImageLayerService {
 
 }
 
-async function removeFromLoadingLayersWithDelay(loadingLayer:LoadingLayer, loadingLayers:Map<string, LoadingLayer>) {
-  await delay(2000);
-  loadingLayers.delete(loadingLayer.key)
-}
-
-function delay(ms: number) {
-  return new Promise( resolve => setTimeout(resolve, ms) );
-  // return timer(ms);
+function removeFromLoadingLayersWithDelay(loadingLayer: LoadingLayer, loadingLayers: Map<string, LoadingLayer>) {
+  timer(2000).subscribe(() => loadingLayers.delete(loadingLayer.key));
 }
