@@ -3,8 +3,7 @@
   /*width: 15%;*/
   min-width: 20em;
   left: 0.5em;
-  top: 20em;
-  border-radius: 30px;
-  /*background-color: rgb(67, 67, 110, 0.65);*/
-  color: #8f8f8f;
+  bottom: 3em;
+  color: grey;
+  font-size: 9px;
 }
