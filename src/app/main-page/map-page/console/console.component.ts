@@ -13,10 +13,10 @@ export class ConsoleComponent {
     this.loadingLayers = []
   }
 
-  getLayers() {
+  getLayers(): LoadingLayer[] {
     this.loadingLayers = Array.from(this.imageLayerService.loadingLayers.values());
-    // this.loadingLayers.forEach(l => console.log(l.key))
     return this.loadingLayers;
   }
 
+  protected readonly JSON = JSON;
 }

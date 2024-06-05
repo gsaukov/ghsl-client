@@ -82,6 +82,7 @@ export class ImageLayerService {
     image.getImage().onload = function(){
       loadingLayer.loaded = true;
       loadingLayer.timeMs = new Date().getTime() - execTime
+      console.log('time:' + loadingLayer.timeMs)
       removeFromLoadingLayersWithDelay(loadingLayer, loadingLayers)
     }
     console.log(loadingLayers.size)
@@ -91,5 +92,5 @@ export class ImageLayerService {
 }
 
 function removeFromLoadingLayersWithDelay(loadingLayer: LoadingLayer, loadingLayers: Map<string, LoadingLayer>) {
-  timer(2000).subscribe(() => loadingLayers.delete(loadingLayer.key));
+  timer(60000).subscribe(() => loadingLayers.delete(loadingLayer.key));
 }
