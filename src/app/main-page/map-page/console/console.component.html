@@ -2,20 +2,18 @@
   <thead class="console-table-header">
   <tr>
     <td>
-      Layers:
+      <ng-container *ngIf="getLayers().length > 0;">Loading {{getLayers().length}} layers:</ng-container>
     </td>
   </tr>
   </thead>
-  <tbody *ngFor="let el of getLayers()">
-    <tr>
+  <tbody>
+    <tr *ngFor="let el of getLayers()" class="loading-layer-row">
       <td>{{el.key}}</td>
       <td>
-<!--        <ng-template *ngIf="el.loaded; then timeTemplate; else spinner" [ngTemplateOutletContext]="{ $implicit: el }"></ng-template>-->
         <ng-container *ngIf="el.loaded; else spinner">
-          <ng-container *ngTemplateOutlet="timeTemplate; context: { $implicit: el }"></ng-container>
+          <ng-container *ngTemplateOutlet="loadingTime; context: { $implicit: el }"></ng-container>
         </ng-container>
       </td>
-
     </tr>
   </tbody>
   <tfoot class="console-table-header">
@@ -47,6 +45,6 @@
   </div>
 </ng-template>
 
-<ng-template #timeTemplate let-el>
+<ng-template #loadingTime let-el>
     {{ el.timeMs }} ms
 </ng-template>

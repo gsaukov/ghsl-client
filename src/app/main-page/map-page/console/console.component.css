@@ -1,9 +1,32 @@
 .console-table {
+  display: flex;
+  flex-direction: column;
   position: fixed;
-  /*width: 15%;*/
   min-width: 20em;
   left: 0.5em;
   bottom: 3em;
   color: grey;
   font-size: 9px;
+}
+
+tbody {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: 10em;
+}
+
+.loading-layer-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  margin: 0.2em;
+}
+
+@media screen and (max-width: 720px) {
+  .console-table {
+    transform: scale(0.75);
+    left: -3em;
+    bottom: 2em;
+  }
 }
