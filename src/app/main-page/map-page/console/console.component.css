@@ -23,6 +23,11 @@ tbody {
   margin: 0.2em;
 }
 
+.arrows {
+  transform: rotate(-90deg);
+  font-size: 15px;
+}
+
 @media screen and (max-width: 720px) {
   .console-table {
     transform: scale(0.75);
