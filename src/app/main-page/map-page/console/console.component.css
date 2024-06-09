@@ -35,4 +35,9 @@ tbody {
     left: -3em;
     bottom: 2em;
   }
+  .console-control {
+    /*this fixes worn stats position*/
+    margin-left: 2em;
+    margin-bottom: 1em;
+  }
 }
