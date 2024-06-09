@@ -1,28 +1,34 @@
 <table class="console-table">
-  <thead class="console-table-header">
-  <tr>
-    <td>
-      <ng-container *ngIf="getLayers().length > 0;">Loading {{getLayers().length}} layers:</ng-container>
-    </td>
-  </tr>
-  </thead>
-  <tbody #logRecords [scrollTop]="logRecords.scrollHeight">
-    <tr *ngFor="let el of getLayers()" class="loading-layer-row">
-      <td>{{el.key}}</td>
-      <td>
-        <ng-container *ngIf="el.loaded; else spinner">
-          <ng-container *ngTemplateOutlet="loadingTime; context: { $implicit: el }"></ng-container>
-        </ng-container>
-      </td>
+  <ng-container *ngIf="isConsoleOpen; else consoleControl">
+    <thead class="console-table-header">
+      <tr>
+        <td>
+          <ng-container *ngIf="getLayers().length > 0;">Loading {{getLayers().length}} layers:</ng-container>
+        </td>
+        <td class="arrows" (click)="openConsole()">«</td>
+      </tr>
+    </thead>
+    <tbody #logRecords [scrollTop]="logRecords.scrollHeight">
+      <tr *ngFor="let el of getLayers()" class="loading-layer-row">
+        <td>{{el.key}}</td>
+        <td>
+          <ng-container *ngIf="el.loaded; else spinner">
+            <ng-container *ngTemplateOutlet="loadingTime; context: { $implicit: el }"></ng-container>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </ng-container>
+</table>
+
+<ng-template #consoleControl>
+  <tbody>
+    <tr>
+      <td>Stats</td>
+      <td class="arrows" (click)="openConsole()">»</td>
     </tr>
   </tbody>
-  <tfoot class="console-table-header">
-  <tr>
-    <td>Lol</td>
-    <td class="arrows">»</td>
-  </tr>
-  </tfoot>
-</table>
+</ng-template>
 
 <ng-template #spinner>
   <div class="spinner-container">

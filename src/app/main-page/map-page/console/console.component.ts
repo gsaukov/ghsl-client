@@ -7,10 +7,12 @@ import {ImageLayerService, LoadingLayer} from "../../../services/image-layer.ser
   styleUrl: './console.component.css'
 })
 export class ConsoleComponent {
+  isConsoleOpen: boolean
   loadingLayers: LoadingLayer[]
 
   constructor(private imageLayerService: ImageLayerService) {
     this.loadingLayers = []
+    this.isConsoleOpen = true
   }
 
   getLayers(): LoadingLayer[] {
@@ -18,5 +20,7 @@ export class ConsoleComponent {
     return this.loadingLayers;
   }
 
-  protected readonly JSON = JSON;
+  openConsole() {
+    this.isConsoleOpen = !this.isConsoleOpen
+  }
 }
