@@ -12,7 +12,7 @@ export class ConsoleComponent {
 
   constructor(private imageLayerService: ImageLayerService) {
     this.loadingLayers = []
-    this.isConsoleOpen = true
+    this.isConsoleOpen = false
   }
 
   getLayers(): LoadingLayer[] {
