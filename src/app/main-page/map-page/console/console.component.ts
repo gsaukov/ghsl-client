@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
 import {ImageLayerService, LoadingLayer} from "../../../services/image-layer.service";
 
 @Component({
@@ -6,7 +6,9 @@ import {ImageLayerService, LoadingLayer} from "../../../services/image-layer.ser
   templateUrl: './console.component.html',
   styleUrl: './console.component.css'
 })
-export class ConsoleComponent {
+export class ConsoleComponent implements AfterViewChecked {
+  @ViewChild('logRecords', { static: false }) logRecords!: ElementRef;
+
   isConsoleOpen: boolean
   loadingLayers: LoadingLayer[]
 
@@ -18,6 +20,13 @@ export class ConsoleComponent {
   getLayers(): LoadingLayer[] {
     this.loadingLayers = Array.from(this.imageLayerService.loadingLayers.values());
     return this.loadingLayers;
+  }
+
+  ngAfterViewChecked() {
+    if(this.logRecords) {
+      //move scroll to bottom
+      this.logRecords.nativeElement.scrollTop = this.logRecords.nativeElement.scrollHeight;
+    }
   }
 
   openConsole() {

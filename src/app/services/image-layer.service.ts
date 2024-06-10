@@ -19,6 +19,7 @@ export interface LoadingLayer {
   key: string;
   timeMs?: number;
   loaded: boolean;
+  error: boolean;
 }
 
 @Injectable({
@@ -77,15 +78,19 @@ export class ImageLayerService {
 
   imageLoadingFunction(image: any, src: any, key: string, loadingLayers:Map<string, LoadingLayer>):LoadingLayer {
     const execTime = new Date().getTime();
-    const loadingLayer:LoadingLayer = {key: key, loaded:false}
-    image.getImage().src = src;
-    image.getImage().onload = function(){
+    const loadingLayer:LoadingLayer = {key: key, loaded:false, error:false}
+    const loadingImage = image.getImage()
+    loadingImage.src = src;
+    loadingImage.onload = function(){
       loadingLayer.loaded = true;
       loadingLayer.timeMs = new Date().getTime() - execTime
-      console.log('time:' + loadingLayer.timeMs)
       removeFromLoadingLayersWithDelay(loadingLayer, loadingLayers)
     }
-    console.log(loadingLayers.size)
+    loadingImage.onerror = function () {
+      loadingLayer.loaded = true;
+      loadingLayer.error = true;
+      removeFromLoadingLayersWithDelay(loadingLayer, loadingLayers)
+    }
     return loadingLayer;
   }
 
