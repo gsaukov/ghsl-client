@@ -24,9 +24,7 @@ export class LegendComponent {
       backdropClass: 'overlay-background'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
   toggle(){

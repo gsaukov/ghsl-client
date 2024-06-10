@@ -94,6 +94,9 @@ export class ImageLayerService {
     return loadingLayer;
   }
 
+  clearLoadingLayers() {
+    this.loadingLayers.clear()
+  }
 }
 
 function removeFromLoadingLayersWithDelay(loadingLayer: LoadingLayer, loadingLayers: Map<string, LoadingLayer>) {
