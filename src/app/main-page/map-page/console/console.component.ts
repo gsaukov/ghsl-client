@@ -10,16 +10,13 @@ export class ConsoleComponent implements AfterViewChecked {
   @ViewChild('logRecords', { static: false }) logRecords!: ElementRef;
 
   isConsoleOpen: boolean
-  loadingLayers: LoadingLayer[]
 
   constructor(private imageLayerService: ImageLayerService) {
-    this.loadingLayers = []
     this.isConsoleOpen = false
   }
 
   getLayers(): LoadingLayer[] {
-    this.loadingLayers = Array.from(this.imageLayerService.loadingLayers.values());
-    return this.loadingLayers;
+    return Array.from(this.imageLayerService.loadingLayers.values());
   }
 
   ngAfterViewChecked() {
@@ -31,5 +28,17 @@ export class ConsoleComponent implements AfterViewChecked {
 
   openConsole() {
     this.isConsoleOpen = !this.isConsoleOpen
+  }
+
+  clearConsole() {
+    this.imageLayerService.clearLoadingLayers()
+  }
+
+  copyToMemBuffer() {
+    navigator.clipboard.writeText(JSON.stringify(this.getLayers())).then(() => {
+      console.log('Map JSON copied to clipboard successfully!');
+    }).catch(err => {
+      console.error('Could not copy text: ', err);
+    });
   }
 }

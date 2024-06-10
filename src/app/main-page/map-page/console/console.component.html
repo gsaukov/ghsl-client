@@ -12,7 +12,7 @@
       <ng-container *ngIf="getLayers().length > 0; else nothingLoading">
         <tr *ngFor="let el of getLayers()" class="loading-layer-row">
           <td>{{el.key}}</td>
-          <td>
+          <td class="loading-layer-res-column">
             <ng-container *ngIf="el.loaded; else spinner">
               <ng-container *ngIf="!el.error; else errorTemplate">
                 <ng-container *ngTemplateOutlet="loadingTime; context: { $implicit: el }"></ng-container>
@@ -23,11 +23,11 @@
       </ng-container>
     </tbody>
     <tfoot class="console-table-header">
-      <tr>
-        <td class="console-footer-control">+</td>
-        <td class="console-footer-control">-</td>
-        <td class="console-footer-control">cop</td>
-        <td class="console-footer-control">clear</td>
+      <tr class="console-footer-control">
+        <td>+</td>
+        <td>-</td>
+        <td (click)="copyToMemBuffer()">copy</td>
+        <td (click)="clearConsole()">clear</td>
       </tr>
     </tfoot>
   </ng-container>

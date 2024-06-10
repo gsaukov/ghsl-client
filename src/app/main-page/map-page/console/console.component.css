@@ -12,6 +12,7 @@
 tbody {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   overflow: auto;
   max-height: 10em;
 }
@@ -19,8 +20,12 @@ tbody {
 .loading-layer-row {
   display: flex;
   justify-content: space-around;
-  align-items: stretch;
+  align-items: flex-start;
   margin: 0.2em;
+}
+
+.loading-layer-res-column {
+  margin-left: 1em;
 }
 
 .arrows {
