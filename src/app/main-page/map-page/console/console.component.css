@@ -29,6 +29,11 @@ tbody {
   cursor: pointer;
 }
 
+.console-footer-control {
+  font-size: 10px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 720px) {
   .console-table {
     transform: scale(0.75);
@@ -36,7 +41,7 @@ tbody {
     bottom: 2em;
   }
   .console-control {
-    /*this fixes worn stats position*/
+    /*this fixes stats position*/
     margin-left: 2em;
     margin-bottom: 1em;
   }

@@ -3,21 +3,33 @@
     <thead class="console-table-header">
       <tr>
         <td>
-          <ng-container *ngIf="getLayers().length > 0;">Loading {{getLayers().length}} layers:</ng-container>
+          Loaded {{getLayers().length}} layers:
         </td>
         <td class="arrows" (click)="openConsole()">«</td>
       </tr>
     </thead>
     <tbody #logRecords [scrollTop]="logRecords.scrollHeight">
-      <tr *ngFor="let el of getLayers()" class="loading-layer-row">
-        <td>{{el.key}}</td>
-        <td>
-          <ng-container *ngIf="el.loaded; else spinner">
-            <ng-container *ngTemplateOutlet="loadingTime; context: { $implicit: el }"></ng-container>
-          </ng-container>
-        </td>
-      </tr>
+      <ng-container *ngIf="getLayers().length > 0; else nothingLoading">
+        <tr *ngFor="let el of getLayers()" class="loading-layer-row">
+          <td>{{el.key}}</td>
+          <td>
+            <ng-container *ngIf="el.loaded; else spinner">
+              <ng-container *ngIf="!el.error; else errorTemplate">
+                <ng-container *ngTemplateOutlet="loadingTime; context: { $implicit: el }"></ng-container>
+              </ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
+    <tfoot class="console-table-header">
+      <tr>
+        <td class="console-footer-control">+</td>
+        <td class="console-footer-control">-</td>
+        <td class="console-footer-control">cop</td>
+        <td class="console-footer-control">clear</td>
+      </tr>
+    </tfoot>
   </ng-container>
 </table>
 
@@ -54,4 +66,12 @@
 
 <ng-template #loadingTime let-el>
     {{ el.timeMs }} ms
+</ng-template>
+
+<ng-template #nothingLoading>
+  <span>no events here</span>
+</ng-template>
+
+<ng-template #errorTemplate>
+  <span style="color: red">error</span>
 </ng-template>
