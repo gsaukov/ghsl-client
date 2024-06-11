@@ -41,13 +41,7 @@ tbody {
 
 @media screen and (max-width: 720px) {
   .console-table {
+    transform-origin: bottom left;
     transform: scale(0.75);
-    left: -3em;
-    bottom: 2em;
-  }
-  .console-control {
-    /*this fixes stats position*/
-    margin-left: 2em;
-    margin-bottom: 1em;
   }
 }

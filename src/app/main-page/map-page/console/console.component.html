@@ -35,7 +35,7 @@
 
 <ng-template #consoleControl>
   <tbody>
-    <tr class="console-control">
+    <tr>
       <td>Stats</td>
       <td class="arrows" (click)="openConsole()">»</td>
     </tr>
@@ -69,7 +69,9 @@
 </ng-template>
 
 <ng-template #nothingLoading>
-  <span>no recent events here</span>
+    <tr class="loading-layer-row">
+      <td>no recent events here</td>
+    </tr>
 </ng-template>
 
 <ng-template #errorTemplate>

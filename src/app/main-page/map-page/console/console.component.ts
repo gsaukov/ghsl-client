@@ -35,10 +35,6 @@ export class ConsoleComponent implements AfterViewChecked {
   }
 
   copyToMemBuffer() {
-    navigator.clipboard.writeText(JSON.stringify(this.getLayers())).then(() => {
-      console.log('Map JSON copied to clipboard successfully!');
-    }).catch(err => {
-      console.error('Could not copy text: ', err);
-    });
+    navigator.clipboard.writeText(JSON.stringify(this.getLayers())).then(() => {});
   }
 }
