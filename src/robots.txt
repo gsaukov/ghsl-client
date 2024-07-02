@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gsaukov.github.io/population-density-map/sitemap.xml
