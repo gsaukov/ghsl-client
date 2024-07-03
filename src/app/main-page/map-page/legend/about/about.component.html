@@ -5,16 +5,16 @@
       <span>Global Human Settlement Layer, or Population Density map data that uses data from European Union's Copernicus Project
         <a class="dark-link" target="_blank" href="https://human-settlement.emergency.copernicus.eu/">human-settlement.emergency.copernicus.eu</a> and represent global human density layer for year 2025.<br>
       </span>
-      <span>Resolutions:</span>
+      <span>Depending on a zoom level Population density map is showing 3 different by size kind of blocks:</span>
       <ol>
-        <li> 3ss files originate from the original images with a resolution of 3 arcseconds, with dimensions 12000x12000 pixels. Each of these images is divided into 16 smaller images, each sized 3000x3000 pixels (arranged in a 4x4 grid). This process reduces a single PNG image, typically around 70MB in size, into 16 smaller images, each with a maximum size of around 5MB.</li>
-        <li> 30ss files, on the other hand, are derived directly from the original images with a resolution of 30 arcseconds, with dimensions 1200x1200 pixels. These files undergo no transformation except for adjustments to the color scheme and conversion from TIFF to PNG format.</li>
-        <li> 90ss files, they are created by combining and compressing 30ss files. Specifically, nine 30ss files arranged in a 3x3 grid are merged and compressed into a single 90ss file, maintaining a resolution of 1200x1200 pixels.</li>
+        <ul> 3ss 10000m<sup>2</sup> (100 x 100 meters rectangle) files originate from the original images with a resolution of 3 arcseconds, with dimensions 12000x12000 pixels. Each of these images is divided into 16 smaller images, each sized 3000x3000 pixels (arranged in a 4x4 grid). This process reduces a single PNG image, typically around 70MB in size, into 16 smaller images, each with a maximum size of around 5MB.</ul>
+        <ul> 30ss 1km<sup>2</sup> (1 x 1 kilometers rectangle), on the other hand, are derived directly from the original images with a resolution of 30 arcseconds, with dimensions 1200x1200 pixels. These files undergo no transformation except for adjustments to the color scheme and conversion from TIFF to PNG format.</ul>
+        <ul> 90ss 9km<sup>2</sup> (3 x 3 kilometers rectangle), they are created by combining and compressing 30ss files. Specifically, nine 30ss files arranged in a 3x3 grid are merged and compressed into a single 90ss file, maintaining a resolution of 1200x1200 pixels.</ul>
       </ol>
-      <span> I <br></span>
+      <span>Depending on population density blocks change their color from transparent light green <br></span>
       <span><br></span>
       <span>Georgy Saukov, 2024.<br></span>
 </mat-dialog-content>
 <mat-dialog-actions style="display: flex; justify-content: flex-end; right: 1em;">
-  <button mat-button (click)="onNoClick()" style="background: rgba(255,255,255,0.25); color: white; border-radius: 20px;">OK</button>
+  <button mat-button (click)="onOkClick()" style="background: rgba(255,255,255,0.25); color: white; border-radius: 20px;">OK</button>
 </mat-dialog-actions>

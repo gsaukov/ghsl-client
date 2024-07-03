@@ -19,7 +19,7 @@ export class AboutComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
 
-  onNoClick(): void {
+  onOkClick(): void {
     this.dialogRef.close();
   }
 }
