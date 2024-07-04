@@ -23,5 +23,5 @@ LAZY loading: https://stackoverflow.com/questions/77428955/openlayer-on-zooming-
 
 ### Build
 ```
-ng build --configuration production --base-href https://gsaukov.github.io/ghsl-client/
+ng build --configuration production --base-href https://gsaukov.github.io/population-density-map/
 ```
