@@ -7,6 +7,7 @@ body {
   font-family: Raleway, sans-serif !important;
 }
 
+/* --- MAT DIALOG SETUP START! --- */
 .mat-mdc-dialog-container {
   --mdc-dialog-container-shape: 30px;
   --mdc-dialog-container-color: rgb(67, 67, 110, 0.75);
@@ -22,3 +23,11 @@ body {
 .dark-link:visited { color: deepskyblue; }
 .dark-link:hover { color: white; }
 .dark-link:active { color: lightskyblue; text-decoration:none; font-weight:normal; }
+
+@media screen and (max-width: 720px) {
+  .mat-mdc-dialog-container {
+    --mdc-dialog-supporting-text-size: 12px;
+    --mdc-dialog-supporting-text-line-height: 18px;
+  }
+}
+/* --- MAT DIALOG SETUP END! --- */
