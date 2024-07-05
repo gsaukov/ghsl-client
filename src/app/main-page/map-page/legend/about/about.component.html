@@ -15,27 +15,6 @@
   </ul>
   <span><br></span>
   <span>Depending on population density blocks change their color:</span>
-<!--  <tr><td [ngStyle]="{'background-color':'#00ff0035', 'opacity':imageLayerService.opacity}">{{getPopulationDensity('1-10')}}</td></tr>       &lt;!&ndash; val: 0.01 color: transparent value: 1-10&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#f4fbf2',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('10-49')}}</td></tr>        &lt;!&ndash; val: 0.1 color: #f4fbf2 value: 10-49&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#f4fbf2',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('50-129')}}</td></tr>       &lt;!&ndash; val: 1.0 color: #f4fbf2 value: 50-129&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#d9f2e5',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('130-399')}}</td></tr>      &lt;!&ndash; val: 2.0 color: #d9f2e5 value: 130-399&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#a8e3e5',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('400-1k')}}</td></tr>       &lt;!&ndash; val: 6.0 color: #a8e3e5 value: 400-1k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#71c7d7',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('1k-2k')}}</td></tr>        &lt;!&ndash; val: 15.0 color: #71c7d7 value: 1k-2k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#428acb',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('2k-3.5k')}}</td></tr>      &lt;!&ndash; val: 27.0 color: #428acb value: 2k-3.5k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#2d6bb3',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('3.5k-5.5k')}}</td></tr>    &lt;!&ndash; val: 42.0 color: #2d6bb3 value: 3.5k-5.5k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#0c4c9f',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('5.5k-7.5k')}}</td></tr>    &lt;!&ndash; val: 62.0 color: #0c4c9f value: 5.5k-7.5k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#00309f',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('7.5k-10k')}}</td></tr>     &lt;!&ndash; val: 82.0 color: #00309f value: 7.5k-10k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#521f8b',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('10k-12k')}}</td></tr>      &lt;!&ndash; val: 110.0 color: #521f8b value: 10k-12k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#700080',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('12k-16k')}}</td></tr>      &lt;!&ndash; val: 140.0 color: #700080 value: 12k-16k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#990049',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('16k-22k')}}</td></tr>      &lt;!&ndash; val: 190.0 color: #990049 value: 16k-22k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#cc003d',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('22k-30k')}}</td></tr>      &lt;!&ndash; val: 260.0 color: #cc003d value: 22k-30k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#ff0000',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('30k-50k')}}</td></tr>      &lt;!&ndash; val: 400.0 color: #ff0000 value: 30k-50k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#ff6200',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('50k-100k')}}</td></tr>     &lt;!&ndash; val: 750.0 color: #ff6200 value: 50k-100k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#ff9e00',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('100k-200k')}}</td></tr>    &lt;!&ndash; val: 1500.0 color: #ff9e00 value: 100k-200k&ndash;&gt;-->
-<!--  <tr><td [ngStyle]="{'background-color':'#ffc300',   'opacity':imageLayerService.opacity}">{{getPopulationDensity('200k+')}}</td></tr>        &lt;!&ndash; val: 3000.0 color: #ffc300 value: 200k+&ndash;&gt;-->
-
-
-
   <ul>
     <li class="color-box-container">It starts transparent light green <div class="color-box" style="background-color:white;"><div class="color-box" style="background-color:#00ff0035; margin: 0"></div></div> that just indicate some human presence on the surface to white <div class="color-box" style="background-color:#f4fbf2"></div> and light blue <div class="color-box" style="background-color:#d9f2e5"></div> color of rural areas, city outskirts and small towns.</li>
     <li class="color-box-container">The next are blue <div class="color-box" style="background-color:#428acb"></div> and violet <div class="color-box" style="background-color:#521f8b"></div> blocks that show moderate urban density with 5 to 10 thousands inhabitants per square kilometer.</li>
