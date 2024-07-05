@@ -24,6 +24,18 @@ body {
 .dark-link:hover { color: white; }
 .dark-link:active { color: lightskyblue; text-decoration:none; font-weight:normal; }
 
+.color-box-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.color-box {
+  height: 1em;
+  width: 1em;
+  border-radius: 0.1em;
+  margin: 0.2em;
+}
+
 @media screen and (max-width: 720px) {
   .mat-mdc-dialog-container {
     --mdc-dialog-supporting-text-size: 12px;
