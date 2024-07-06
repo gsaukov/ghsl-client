@@ -22,6 +22,7 @@ import {
 } from '@angular/material/dialog';
 import {AboutComponent} from "./main-page/map-page/legend/about/about.component";
 import {ConsoleComponent} from "./main-page/map-page/console/console.component";
+import {ColorBoxComponent} from "./main-page/map-page/legend/about/color-box.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {ConsoleComponent} from "./main-page/map-page/console/console.component";
     ToolbarComponent,
     LegendComponent,
     AboutComponent,
-    ConsoleComponent
+    ConsoleComponent,
+    ColorBoxComponent
   ],
     imports: [
         BrowserModule,
