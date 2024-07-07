@@ -22,6 +22,11 @@ https://gis.stackexchange.com/questions/234039/min-max-zoom-levels-for-a-tilelay
 LAZY loading: https://stackoverflow.com/questions/77428955/openlayer-on-zooming-map-image-filter-get-only-visible-areas-on-map  
 
 ### Build
+PROD:
 ```
 ng build --configuration production --base-href https://gsaukov.github.io/population-density-map/
+```
+DEV:
+```
+ng build --configuration production --base-href https://gsaukov.github.io/ghsl-client/
 ```
