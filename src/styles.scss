@@ -25,7 +25,7 @@ body {
 .dark-link:active { color: lightskyblue; text-decoration:none; font-weight:normal; }
 
 .color-box-container {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
