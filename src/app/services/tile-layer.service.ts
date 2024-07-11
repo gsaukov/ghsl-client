@@ -8,7 +8,7 @@ import {meta30ss} from "./metaData30ss"
 import {meta3ss} from "./metaData3ss"
 import {ImageLayerService} from "./image-layer.service";
 import Layer from "ol/layer/Layer";
-import RBush from 'rbush';
+import RBush, { BBox } from 'rbush';
 
 export enum GhslLayerResolution {
   RES_3SS = "3ss",
@@ -68,7 +68,7 @@ export class TileLayerService {
       const tl = getTopLeft(extent);
       const br = getBottomRight(extent);
       const resolution = this.chooseResolution(map.getView().getZoom()!)
-      const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewRPolygonsArray(resolution, [tl[0], br[1], br[0], tl[1]]);
+      const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewRPolygonsArray(resolution, {minX: tl[0], minY: br[1], maxX: br[0], maxY: tl[1]});
       this.currentResolution = resolution;
 
       // CLEAN THIS!
@@ -88,10 +88,10 @@ export class TileLayerService {
 
   }
 
-  private getViewRPolygonsArray(resolution: GhslLayerResolution, coord: number[]): Map<string, Polygon> {
+  private getViewRPolygonsArray(resolution: GhslLayerResolution, bbox: BBox): Map<string, Polygon> {
     const tempVisiblePolygonsMap: Map<string, Polygon> = new Map ();
     const rPolygons = this.choosePolygonArrayR(resolution)
-    const res = rPolygons.search({minX: coord[0], minY: coord[1], maxX: coord[2], maxY: coord[3],})
+    const res = rPolygons.search(bbox)
     res.forEach(v => tempVisiblePolygonsMap.set(v.polygon.get(TileLayerService.ID), v.polygon))
     return tempVisiblePolygonsMap;
   }
