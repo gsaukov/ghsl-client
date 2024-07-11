@@ -2,17 +2,26 @@ import {Injectable} from '@angular/core';
 import OlMap from "ol/Map";
 import {transformExtent} from "ol/proj";
 import {Polygon} from "ol/geom";
-import {getBottomLeft, getBottomRight, getTopLeft, getTopRight} from "ol/extent"
+import {getBottomRight, getTopLeft} from "ol/extent"
 import {meta90ss} from "./metaData90ss"
 import {meta30ss} from "./metaData30ss"
 import {meta3ss} from "./metaData3ss"
 import {ImageLayerService} from "./image-layer.service";
 import Layer from "ol/layer/Layer";
+import RBush from 'rbush';
 
 export enum GhslLayerResolution {
   RES_3SS = "3ss",
   RES_30SS = "30ss",
   RES_90SS ="90ss"
+}
+
+export interface RPolygon {
+  minX: number,
+  minY: number,
+  maxX: number,
+  maxY: number,
+  polygon: Polygon
 }
 
 @Injectable({
@@ -25,17 +34,17 @@ export class TileLayerService {
 
   public currentResolution!:GhslLayerResolution
 
-  polygonsArray3ss: Polygon[]
-  polygonsArray30ss: Polygon[]
-  polygonsArray90ss: Polygon[]
+  rRush3ss: RBush<RPolygon>
+  rRush30ss: RBush<RPolygon>
+  rRush90ss: RBush<RPolygon>
 
   visiblePolygonsMap: Map<string, Polygon> = new Map ();
   visibleLayersMap: Map<string, Layer> = new Map ();
 
   constructor(private imageLayerService:ImageLayerService) {
-    this.polygonsArray3ss = this.getPolygons(GhslLayerResolution.RES_3SS)
-    this.polygonsArray30ss = this.getPolygons(GhslLayerResolution.RES_30SS)
-    this.polygonsArray90ss = this.getPolygons(GhslLayerResolution.RES_90SS)
+    this.rRush3ss = this.getRbush(GhslLayerResolution.RES_3SS)
+    this.rRush30ss = this.getRbush(GhslLayerResolution.RES_30SS)
+    this.rRush90ss = this.getRbush(GhslLayerResolution.RES_90SS)
   }
 
   createTileLayer(map: OlMap) {
@@ -57,12 +66,9 @@ export class TileLayerService {
       const mapExtent =  map.getView().calculateExtent(map.getSize());
       const extent = transformExtent(mapExtent, 'EPSG:3857', 'EPSG:4326');
       const tl = getTopLeft(extent);
-      const tr = getTopRight(extent);
-      const bl = getBottomLeft(extent);
       const br = getBottomRight(extent);
-      const mapViewPolygon = new Polygon([[tl, tr, br, bl, tl]]);
       const resolution = this.chooseResolution(map.getView().getZoom()!)
-      const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewPolygonsArray(resolution, mapViewPolygon);
+      const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewRPolygonsArray(resolution, [tl[0], br[1], br[0], tl[1]]);
       this.currentResolution = resolution;
 
       // CLEAN THIS!
@@ -82,20 +88,16 @@ export class TileLayerService {
 
   }
 
-  private getViewPolygonsArray(resolution: GhslLayerResolution, mapViewPolygon:Polygon): Map<string, Polygon> {
+  private getViewRPolygonsArray(resolution: GhslLayerResolution, coord: number[]): Map<string, Polygon> {
     const tempVisiblePolygonsMap: Map<string, Polygon> = new Map ();
-    const polygonsArray = this.choosePolygonArray(resolution)
-    polygonsArray.forEach(layerPolygon => {
-      const layerPolygonExtent = layerPolygon.getExtent()
-      if (mapViewPolygon.intersectsExtent(layerPolygonExtent)) {
-        tempVisiblePolygonsMap.set(layerPolygon.get(TileLayerService.ID), layerPolygon)
-      }
-    })
+    const rPolygons = this.choosePolygonArrayR(resolution)
+    const res = rPolygons.search({minX: coord[0], minY: coord[1], maxX: coord[2], maxY: coord[3],})
+    res.forEach(v => tempVisiblePolygonsMap.set(v.polygon.get(TileLayerService.ID), v.polygon))
     return tempVisiblePolygonsMap;
   }
 
-  private getPolygons(resolution:string):Polygon[] {
-    const polygons: Polygon[] = []
+  private getRbush(resolution:GhslLayerResolution):RBush<RPolygon> {
+    const rbush = new RBush<RPolygon>();
     const meta = this.chooseMeta(resolution)
     Object.keys(meta).forEach(function(key){
       const tl = meta[key].topLeftCorner
@@ -105,9 +107,11 @@ export class TileLayerService {
       const polygon = new Polygon([[tl, tr, br, bl, tl]]);
       polygon.set(TileLayerService.ID, key)
       polygon.set(TileLayerService.RES, resolution)
-      polygons.push(polygon);
+
+      const rPolygon:RPolygon = {minX: tl[0], minY: br[1], maxX: br[0], maxY: tl[1], polygon: polygon}
+      rbush.insert(rPolygon)
     });
-    return polygons
+    return rbush
   }
 
   private deleteFromMap(map:OlMap, polygonsMap: Map<string, Polygon>) {
@@ -168,13 +172,13 @@ export class TileLayerService {
     }
   }
 
-  private choosePolygonArray(resolution:GhslLayerResolution):Polygon[] {
+  private choosePolygonArrayR(resolution:GhslLayerResolution):RBush<RPolygon> {
     if(resolution === GhslLayerResolution.RES_3SS) {
-      return this.polygonsArray3ss
+      return this.rRush3ss
     } else if (resolution === GhslLayerResolution.RES_30SS) {
-      return this.polygonsArray30ss
+      return this.rRush30ss
     } else {
-      return this.polygonsArray90ss
+      return this.rRush90ss
     }
   }
 
