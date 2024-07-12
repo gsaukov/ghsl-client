@@ -4,6 +4,7 @@ import {MatDrawer} from '@angular/material/sidenav';
 import {GhslLayerResolution, TileLayerService} from "../../../services/tile-layer.service";
 import { MatDialog } from '@angular/material/dialog';
 import {AboutComponent} from "./about/about.component";
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-legend',
@@ -14,6 +15,7 @@ export class LegendComponent {
   @ViewChild('drawer') drawer!: MatDrawer;
 
   isLegendOpen:boolean = false;
+  shakingAboutLinkClass: string = 'about-link shake-about-link';
 
   constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService, public dialog: MatDialog) {
   }
@@ -30,6 +32,8 @@ export class LegendComponent {
   toggle(){
     this.drawer.toggle()
     this.isLegendOpen = !this.isLegendOpen;
+    //this will stop shaking about link after legend opened first time.
+    timer(8000).subscribe(() => this.shakingAboutLinkClass = 'about-link');
   }
 
   getAreaResolution():string {
