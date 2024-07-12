@@ -7,11 +7,39 @@ body {
   font-family: Raleway, sans-serif !important;
 }
 
-/* --- MAT DIALOG SETUP START! --- */
+/* --- ABOUT DIALOG SETUP START! --- */
 .mat-mdc-dialog-container {
   --mdc-dialog-container-shape: 30px;
   --mdc-dialog-container-color: rgb(67, 67, 110, 0.75);
   --mdc-dialog-supporting-text-color: rgba(255, 255, 255);
+}
+
+.about-button {
+  background: rgba(255,255,255,0.25) !important;
+  color: white !important;
+  border-radius: 20px !important;
+}
+
+.scroll-indicator {
+  position: absolute !important;
+  bottom: 50px; /* Adjust as needed */
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 12px; /* Adjust as needed */
+  color: rgb(67, 67, 110, 0.75);
+  animation: bounce 3s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translate(-50%, 0);
+  }
+  40% {
+    transform: translate(-50%, -8px);
+  }
+  60% {
+    transform: translate(-50%, -4px);
+  }
 }
 
 .overlay-background {
@@ -43,4 +71,4 @@ body {
     --mdc-dialog-supporting-text-line-height: 18px;
   }
 }
-/* --- MAT DIALOG SETUP END! --- */
+/* --- ABOUT DIALOG SETUP END! --- */
