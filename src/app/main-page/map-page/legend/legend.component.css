@@ -70,12 +70,29 @@ td {
 }
 
 .about-link {
+  display: inline-block;
   color: white;
   text-decoration-line: underline;
 }
 
 .about-link:hover {
   cursor: pointer;
+}
+
+.shake-about-link {
+  animation: shake 1s infinite;
+}
+
+@keyframes shake {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translate(0, 0);
+  }
+  40% {
+    transform: translate(12px, 0);
+  }
+  60% {
+    transform: translate(6px, 0);
+  }
 }
 
 @media screen and (max-width: 720px) {
