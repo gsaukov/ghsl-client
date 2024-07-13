@@ -18,11 +18,12 @@ export class LegendComponent {
   shakingAboutLinkClass: string = 'about-link shake-about-link';
 
   constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService, public dialog: MatDialog) {
+    this.openAboutDialog()
   }
 
   openAboutDialog(): void {
     const dialogRef = this.dialog.open(AboutComponent, {
-      data: {name: "Title", animal: "Content"},
+      data: {},
       backdropClass: 'overlay-background'
     });
 

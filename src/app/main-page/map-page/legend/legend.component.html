@@ -31,16 +31,17 @@
       </tbody>
       <tfoot class="legend-table-header">
         <tr>
-          <td><a [className]="shakingAboutLinkClass" (click)="openAboutDialog()">About</a></td>
+          <td><a routerLink="/about" [className]="shakingAboutLinkClass" (click)="openAboutDialog()">About</a></td>
         </tr>
       </tfoot>
     </table>
   </mat-drawer>
 
   <div class="{{isLegendOpen?'legend-control-closed':'legend-control'}}">
-    <button type="button" mat-button [disableRipple]="true" (click)="toggle()" style="width: 2em;">
+    <button type="button" color="accent" mat-button [disableRipple]="true" (click)="toggle()" style="width: 2em;">
       {{isLegendOpen?'X':'Legend'}}
     </button>
   </div>
 
 </mat-drawer-container>
+<router-outlet></router-outlet>
