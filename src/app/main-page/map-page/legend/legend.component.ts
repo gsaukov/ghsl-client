@@ -5,6 +5,7 @@ import {GhslLayerResolution, TileLayerService} from "../../../services/tile-laye
 import { MatDialog } from '@angular/material/dialog';
 import {AboutComponent} from "./about/about.component";
 import { timer } from 'rxjs';
+import {ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-legend',
@@ -17,7 +18,8 @@ export class LegendComponent {
   isLegendOpen:boolean = false;
   shakingAboutLinkClass: string = 'about-link shake-about-link';
 
-  constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService, public dialog: MatDialog) {
+  constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService, public dialog: MatDialog,
+              private router: Router, private route: ActivatedRoute) {
     this.openAboutDialog()
   }
 
