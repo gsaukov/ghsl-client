@@ -2,10 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ImageLayerService} from "../../../services/image-layer.service";
 import {MatDrawer} from '@angular/material/sidenav';
 import {GhslLayerResolution, TileLayerService} from "../../../services/tile-layer.service";
-import { MatDialog } from '@angular/material/dialog';
-import {AboutComponent} from "./about/about.component";
 import { timer } from 'rxjs';
-import {ActivatedRoute, Router } from '@angular/router';
+import {DialogService} from "../../../services/dialog.service";
 
 @Component({
   selector: 'app-legend',
@@ -18,18 +16,11 @@ export class LegendComponent {
   isLegendOpen:boolean = false;
   shakingAboutLinkClass: string = 'about-link shake-about-link';
 
-  constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService, public dialog: MatDialog,
-              private router: Router, private route: ActivatedRoute) {
-    this.openAboutDialog()
+  constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService, private dialogService: DialogService) {
   }
 
   openAboutDialog(): void {
-    const dialogRef = this.dialog.open(AboutComponent, {
-      data: {},
-      backdropClass: 'overlay-background'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {});
+    this.dialogService.openAboutDialog()
   }
 
   toggle(){
