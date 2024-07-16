@@ -23,6 +23,7 @@ import {
 import {AboutComponent} from "./main-page/map-page/about/about.component";
 import {ConsoleComponent} from "./main-page/map-page/console/console.component";
 import {ColorBoxComponent} from "./main-page/map-page/about/color-box.component";
+import {EmptyComponent} from "./main-page/map-page/about/empty.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {ColorBoxComponent} from "./main-page/map-page/about/color-box.component"
     LegendComponent,
     AboutComponent,
     ConsoleComponent,
-    ColorBoxComponent
+    ColorBoxComponent,
+    EmptyComponent
   ],
     imports: [
         BrowserModule,
