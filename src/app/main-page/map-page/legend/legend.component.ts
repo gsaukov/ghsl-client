@@ -3,7 +3,6 @@ import {ImageLayerService} from "../../../services/image-layer.service";
 import {MatDrawer} from '@angular/material/sidenav';
 import {GhslLayerResolution, TileLayerService} from "../../../services/tile-layer.service";
 import { timer } from 'rxjs';
-import {DialogService} from "../../../services/dialog.service";
 
 @Component({
   selector: 'app-legend',
@@ -16,11 +15,7 @@ export class LegendComponent {
   isLegendOpen:boolean = false;
   shakingAboutLinkClass: string = 'about-link shake-about-link';
 
-  constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService, private dialogService: DialogService) {
-  }
-
-  openAboutDialog(): void {
-    this.dialogService.openAboutDialog()
+  constructor(public imageLayerService: ImageLayerService, public tileLayerService: TileLayerService) {
   }
 
   toggle(){
