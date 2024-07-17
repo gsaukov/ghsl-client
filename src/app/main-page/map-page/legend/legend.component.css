@@ -86,6 +86,10 @@ td {
     left: -0.7em;
   }
 
+  .legend-control-closed {
+    margin-left: 0em;
+  }
+
   .legend-content {
     left: -0.5em;
   }
