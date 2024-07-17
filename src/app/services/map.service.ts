@@ -22,18 +22,6 @@ export class MapService {
   private defaultLayer: TileLayer<OSM>;
 
   constructor(private tileLayerService:TileLayerService) {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const view = new View({
-          center: fromLonLat([position.coords.longitude, position.coords.latitude]),
-          zoom: DEFAULT_ZOOM
-        });
-        this.map.setView(view)
-        },
-        () => {},
-        {timeout:10000})
-    }
-
     const attributions = '<a href="https://gsaukov.netlify.app/" target="_blank" style="color:blue;">Georgy Saukov</a> ' +
       '| <a href="https://human-settlement.emergency.copernicus.eu/download.php?ds=pop" target="_blank" style="color:blue;">GHSL Data</a> ' +
       '<br>' +
@@ -90,6 +78,20 @@ export class MapService {
 
   applyGhslVectorLayer(map: Map) {
     this.tileLayerService.createTileLayer(map);
+  }
+
+  toUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+          const view = new View({
+            center: fromLonLat([position.coords.longitude, position.coords.latitude]),
+            zoom: DEFAULT_ZOOM
+          });
+          this.map.setView(view)
+        },
+        () => {},
+        {timeout:10000})
+    }
   }
 
   getMap(): Map {
