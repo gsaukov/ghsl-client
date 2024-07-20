@@ -7,8 +7,8 @@ import OSM from "ol/source/OSM";
 import {mergeMap, Observable, of} from "rxjs";
 import {ScaleLine, defaults} from "ol/control";
 import {TileLayerService} from "./tile-layer.service";
+import {cityList} from "./cityList";
 
-const DEFAULT_COORDINATE: number[] = [10.40041664, 48.77458333]
 const DEFAULT_ZOOM = 8
 const DEFAULT_OSM_MAP = 'default-osm-map'
 const DARK_OSM_MAP = 'dark-osm-map'
@@ -47,13 +47,14 @@ export class MapService {
 
   buildMap(): Observable<Map> {
     return new Observable((observer) => {
+      const rndCity = this.getRandomCity()
       const map = new Map({
         controls: defaults().extend([new ScaleLine({
           units: 'metric',
         })]),
         view: new View({
-          center: fromLonLat(DEFAULT_COORDINATE, 'EPSG:3857'),
-          zoom: DEFAULT_ZOOM,
+          center: fromLonLat([rndCity.pos[0], rndCity.pos[1]], 'EPSG:3857'),
+          zoom: this.getRandomZoom(),
         }),
         layers: [
           this.defaultLayer
@@ -92,6 +93,15 @@ export class MapService {
         () => {},
         {timeout:10000})
     }
+  }
+
+  getRandomCity() {
+    const rnd = Math.floor(Math.random()*cityList.length)
+    return cityList[rnd]
+  }
+
+  getRandomZoom() {
+    return Math.round(Math.random() * 4 + 9)
   }
 
   getMap(): Map {
