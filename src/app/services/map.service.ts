@@ -101,6 +101,7 @@ export class MapService {
   }
 
   getRandomZoom() {
+    //zoom range from 9 to 13.
     return Math.round(Math.random() * 4 + 9)
   }
 

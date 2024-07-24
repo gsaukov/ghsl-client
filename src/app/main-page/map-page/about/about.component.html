@@ -1,16 +1,16 @@
 <h1 mat-dialog-title style="color: white">About this map.</h1>
 <mat-dialog-content #scrollArea (scroll)="detectScrollIndicator()">
-  <span> Hello and welcome to 2025 population density map!<br></span>
-  <span>This Global Human Settlement Layer or Population Density Map is build using data from European Union's Copernicus Project
+  <span>Hello and welcome to the interactive 2025 population density map!<br></span>
+  <span>This Global Human Settlement Layer, or Population Density Map, is built using data from the European Union's Copernicus Project
         <a class="dark-link" target="_blank" href="https://human-settlement.emergency.copernicus.eu/">human-settlement.emergency.copernicus.eu</a>
-        and represent global human density layer for year 2025.<br>
+        and represents the global human density layer for the year 2025.<br>
       </span>
   <span><br></span>
-  <span>Depending on a zoom level population density map use 3 different by size kind of blocks:</span>
+  <span>Depending on a zoom level population density map uses 3 different by size kind of blocks:</span>
   <ul>
-    <li>3ss 10000m<sup>2</sup> - 100x100 meters rectangle. On this level you can examine population density of a street or even house level.</li>
-    <li>30ss 1km<sup>2</sup> - 1x1 kilometer rectangle. This level best represent regional or urban population density.</li>
-    <li>90ss 9km<sup>2</sup> - 3x3 kilometers rectangle. On this zoom level you global human presence on a scale of a country, continent or even whole world! Try it in dark mode!</li>
+    <li>3ss 10000m<sup>2</sup> - 100x100 meters rectangle. This level allows you to examine the population density of a street or even a single house.</li>
+    <li>30ss 1km<sup>2</sup> - 1x1 kilometer rectangle. This best represents regional or urban population density.</li>
+    <li>90ss 9km<sup>2</sup> - 3x3 kilometers rectangle. At this zoom level, you can view human presence on a country, continent, or even global scale! Try it in dark mode!</li>
   </ul>
   <span>Color of the block is determined by population density:</span>
   <ul>
@@ -21,11 +21,10 @@
   </ul>
   <span>Map offers you following controls:</span>
   <ul>
-    <li>Opacity - Adds transparency to population density layer so you can view map alone to find building, street or city.</li>
-    <li>Interpolation - Smooths transition between blocks for harmonized map perception.</li>
-    <li>Dark mode - This is my favorite mode! It emphasizes light green and white blocks revealing every place of human
-      presence on the map. But its best feature is ability to draw incredibly beautiful map when at a scale of continent
-      or whole world!
+    <li>Opacity - Adds transparency to the population density layer, allowing you to view the map alone to find districts, streets, or houses.</li>
+    <li>Interpolation - Smooths transitions between blocks for a harmonized map perception.</li>
+    <li>Dark mode - This is my favorite mode! It emphasizes light green and white blocks, revealing every place of human presence on the map.
+      Its best feature is the ability to create incredibly beautiful map when viewed at the scale of a continent or the whole world!
     </li>
   </ul>
   <span><div class="color-box-container" style="align-items: flex-end;">The farther from the equator<div>&nbsp;</div>and closer to the poles, the<div>&nbsp;</div>more the blocks<div>&nbsp;</div>change their dimensions<div>&nbsp;</div>and become <app-color-box boxColor="#a8e3e5b2" boxHeight="1.4em"></app-color-box> taller. Blocks near<div>&nbsp;</div>the equator retain their<div>&nbsp;</div>square <app-color-box boxColor="#a8e3e5b2"></app-color-box> form. This is<div>&nbsp;</div>due to the <div>&nbsp;</div>WGS84 projection, which<div>&nbsp;</div>represents the Earth<div>&nbsp;</div>as an unfolded cylinder<div>&nbsp;</div>with elongation at the ends.</div><br></span>
