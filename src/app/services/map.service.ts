@@ -9,7 +9,7 @@ import {ScaleLine, defaults} from "ol/control";
 import {TileLayerService} from "./tile-layer.service";
 import {cityList} from "./cityList";
 
-const DEFAULT_ZOOM = 8
+const DEFAULT_ZOOM = 12
 const DEFAULT_OSM_MAP = 'default-osm-map'
 const DARK_OSM_MAP = 'dark-osm-map'
 
