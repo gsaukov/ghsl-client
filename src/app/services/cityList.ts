@@ -34,7 +34,7 @@ export const cityList: any =
       },
       {
         "city": "Munich",
-        "pos": [10.40041664, 48.77458333]
+        "pos": [11.576124, 48.137154]
       },
       {
         "city": "Tashkent",
