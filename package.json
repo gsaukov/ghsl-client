@@ -4,7 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ssl",
-    "build": "ng build",
+    "build-prod": "ng build --configuration production --base-href https://gsaukov.github.io/population-density-map/",
+    "postbuild-prod": "node create-about.js",
+    "build-dev": "ng build --configuration production --base-href https://gsaukov.github.io/ghsl-client/",
+    "postbuild-dev": "node create-about.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

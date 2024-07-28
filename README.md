@@ -24,9 +24,9 @@ LAZY loading: https://stackoverflow.com/questions/77428955/openlayer-on-zooming-
 ### Build
 PROD:
 ```
-ng build --configuration production --base-href https://gsaukov.github.io/population-density-map/
+npm run build-prod
 ```
 DEV:
 ```
-ng build --configuration production --base-href https://gsaukov.github.io/ghsl-client/
+npm run build-dev
 ```
