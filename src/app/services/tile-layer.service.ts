@@ -100,8 +100,8 @@ export class TileLayerService {
     const rbush = new RBush<RPolygon>();
     const meta = this.chooseMeta(resolution)
     Object.keys(meta).forEach(function(key){
-      const tl = meta[key].topLeftCorner
-      const br = meta[key].bottomRightCorner
+      const tl = meta[key].tl
+      const br = meta[key].br
       const tr = [tl[0],br[1]]
       const bl = [br[0],tl[1]]
       const polygon = new Polygon([[tl, tr, br, bl, tl]]);
