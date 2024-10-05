@@ -6,7 +6,7 @@ import {Polygon} from "ol/geom";
 import {TileLayerService} from "./tile-layer.service";
 import {Extent} from "ol/extent";
 import OlMap from "ol/Map";
-import { timer } from 'rxjs';
+import {StatisticsService} from "./statistics.service";
 
 // An array of numbers representing an extent: [minx, miny, maxx, maxy].
 // let extent = [9.992083316153526, 39.099583378875366, 19.992083276545834, 49.09958333862941]
@@ -26,14 +26,12 @@ export interface LoadingLayer {
   providedIn: 'root'
 })
 export class ImageLayerService {
-  loadingLayers: Map<string, LoadingLayer>
   opacity:number
   interpolate:boolean // when false displays pixels and true do smooth/blurs images on zoom.
 
-  constructor() {
+  constructor(private statisticsService: StatisticsService) {
     this.opacity = 0.65
     this.interpolate = false
-    this.loadingLayers = new Map()
   }
 
   addImageLayerFromPolygon(map:OlMap, polygon: Polygon): ImageLayer<ImageStatic> {
@@ -46,8 +44,8 @@ export class ImageLayerService {
   addImageLayerFromExtentAndUrl(map:OlMap, extent: Extent, url: string, key: string): ImageLayer<ImageStatic> {
     let projection = get('EPSG:4326')!
     const imageLoadFunctionWrapper = (image: any, src: any) => {
-      const loadingLayer = this.imageLoadingFunction(image, src, key, this.loadingLayers);
-      this.loadingLayers.set(loadingLayer.key, loadingLayer)
+      const loadingLayer = this.imageLoadingFunction(image, src, key);
+      this.statisticsService.addStatisticLoadingLayer(loadingLayer)
     };
     let imageStatic = new ImageStatic({
       url: url,
@@ -76,7 +74,7 @@ export class ImageLayerService {
     this.interpolate = interpolate
   }
 
-  imageLoadingFunction(image: any, src: any, key: string, loadingLayers:Map<string, LoadingLayer>):LoadingLayer {
+  imageLoadingFunction(image: any, src: any, key: string):LoadingLayer {
     const execTime = new Date().getTime();
     const loadingLayer:LoadingLayer = {key: key, loaded:false, error:false}
     const loadingImage = image.getImage()
@@ -84,21 +82,11 @@ export class ImageLayerService {
     loadingImage.onload = function(){
       loadingLayer.loaded = true;
       loadingLayer.timeMs = new Date().getTime() - execTime
-      removeFromLoadingLayersWithDelay(loadingLayer, loadingLayers)
     }
     loadingImage.onerror = function () {
       loadingLayer.loaded = true;
       loadingLayer.error = true;
-      removeFromLoadingLayersWithDelay(loadingLayer, loadingLayers)
     }
     return loadingLayer;
   }
-
-  clearLoadingLayers() {
-    this.loadingLayers.clear()
-  }
-}
-
-function removeFromLoadingLayersWithDelay(loadingLayer: LoadingLayer, loadingLayers: Map<string, LoadingLayer>) {
-  timer(60000).subscribe(() => loadingLayers.delete(loadingLayer.key));
 }
