@@ -6,9 +6,10 @@ import {getBottomRight, getTopLeft} from "ol/extent"
 import {meta90ss} from "./metaData90ss"
 import {meta30ss} from "./metaData30ss"
 import {meta3ss} from "./metaData3ss"
-import {ImageLayerService} from "./image-layer.service";
+import {ImageLayerService, LoadingLayer} from "./image-layer.service";
 import Layer from "ol/layer/Layer";
 import RBush, { BBox } from 'rbush';
+import {StatisticsService} from "./statistics.service";
 
 export enum GhslLayerResolution {
   RES_3SS = "3ss",
@@ -41,7 +42,7 @@ export class TileLayerService {
   visiblePolygonsMap: Map<string, Polygon> = new Map ();
   visibleLayersMap: Map<string, Layer> = new Map ();
 
-  constructor(private imageLayerService:ImageLayerService) {
+  constructor(private imageLayerService:ImageLayerService, private statisticsService: StatisticsService) {
     this.rRush3ss = this.getRbush(GhslLayerResolution.RES_3SS)
     this.rRush30ss = this.getRbush(GhslLayerResolution.RES_30SS)
     this.rRush90ss = this.getRbush(GhslLayerResolution.RES_90SS)
@@ -63,29 +64,44 @@ export class TileLayerService {
 
   private mapTiler (map: OlMap) {
     map.on('moveend', () => {
-      const mapExtent =  map.getView().calculateExtent(map.getSize());
-      const extent = transformExtent(mapExtent, 'EPSG:3857', 'EPSG:4326');
-      const tl = getTopLeft(extent);
-      const br = getBottomRight(extent);
-      const resolution = this.chooseResolution(map.getView().getZoom()!)
-      const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewRPolygonsArray(resolution, {minX: tl[0], minY: br[1], maxX: br[0], maxY: tl[1]});
-      this.currentResolution = resolution;
-
-      // CLEAN THIS!
-      // Perhaps kill all refresh logic and properly attach unmanaged layer to the map in another promise.
-
-      const toAddVisiblePolygonsMap: Map<string, Polygon> = this.mapDifference(tempVisiblePolygonsMap, this.visiblePolygonsMap)
-      const toDeleteVisiblePolygonsMap: Map<string, Polygon> = this.mapDifference(this.visiblePolygonsMap, tempVisiblePolygonsMap)
-      this.visiblePolygonsMap = new Map([...this.visiblePolygonsMap.entries(), ...toAddVisiblePolygonsMap.entries()])
-      toDeleteVisiblePolygonsMap.forEach((value, key) => {this.visiblePolygonsMap.delete(key)});
-      this.deleteFromMap(map, toDeleteVisiblePolygonsMap)
-      this.addPolygonsToMap(map, toAddVisiblePolygonsMap)
-
-      // Garbage collection and view tests :)
-      // console.log("p size:" + this.visiblePolygonsMap.size + " l size: " + this.visiblePolygonsMap.size)
-      // console.log(this.logKeys(this.visiblePolygonsMap))
+      if(this.statisticsService.vrs) {
+        this.renderViewWithStatistics(map)
+      } else {
+        this.renderView(map)
+      }
     })
+  }
 
+  private renderViewWithStatistics(map: OlMap, ) {
+    const execTime = new Date().getTime();
+    const view = this.renderView(map)
+    this.statisticsService.addStatisticLoadingLayer(this.createRenderingStatistics(view, new Date().getTime() - execTime))
+  }
+
+  private renderView(map: OlMap):number[] {
+    const mapExtent =  map.getView().calculateExtent(map.getSize());
+    const extent = transformExtent(mapExtent, 'EPSG:3857', 'EPSG:4326');
+    const tl = getTopLeft(extent);
+    const br = getBottomRight(extent);
+    const resolution = this.chooseResolution(map.getView().getZoom()!)
+    const tempVisiblePolygonsMap: Map<string, Polygon> = this.getViewRPolygonsArray(resolution, {minX: tl[0], minY: br[1], maxX: br[0], maxY: tl[1]});
+    this.currentResolution = resolution;
+
+    // CLEAN THIS!
+    // Perhaps kill all refresh logic and properly attach unmanaged layer to the map in another promise.
+
+    const toAddVisiblePolygonsMap: Map<string, Polygon> = this.mapDifference(tempVisiblePolygonsMap, this.visiblePolygonsMap)
+    const toDeleteVisiblePolygonsMap: Map<string, Polygon> = this.mapDifference(this.visiblePolygonsMap, tempVisiblePolygonsMap)
+    this.visiblePolygonsMap = new Map([...this.visiblePolygonsMap.entries(), ...toAddVisiblePolygonsMap.entries()])
+    toDeleteVisiblePolygonsMap.forEach((value, key) => {this.visiblePolygonsMap.delete(key)});
+    this.deleteFromMap(map, toDeleteVisiblePolygonsMap)
+    this.addPolygonsToMap(map, toAddVisiblePolygonsMap)
+    // Garbage collection and view tests :)
+    // console.log("p size:" + this.visiblePolygonsMap.size + " l size: " + this.visiblePolygonsMap.size)
+    // console.log(this.logKeys(this.visiblePolygonsMap))
+
+    //this return value purely for view rendering statistics
+    return [tl[0],br[1], br[0],tl[1]]
   }
 
   private getViewRPolygonsArray(resolution: GhslLayerResolution, bbox: BBox): Map<string, Polygon> {
@@ -188,5 +204,12 @@ export class TileLayerService {
       res = res + key + ' '
     });
     return res
+  }
+
+  private createRenderingStatistics(view:number[], timeMs:number): LoadingLayer {
+    const key = `S_${this.visiblePolygonsMap.size}_V_
+    ${view[0].toFixed(6)},${view[1].toFixed(6)};
+    ${view[2].toFixed(6)},${view[3].toFixed(6)}`
+    return {key: key, timeMs: timeMs, loaded: true, error: false}
   }
 }
