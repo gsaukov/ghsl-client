@@ -6,7 +6,7 @@ import {getBottomRight, getTopLeft} from "ol/extent"
 import {meta90ss} from "./metaData90ss"
 import {meta30ss} from "./metaData30ss"
 import {meta3ss} from "./metaData3ss"
-import {ImageLayerService, LoadingLayer} from "./image-layer.service";
+import {ImageLayerService} from "./image-layer.service";
 import Layer from "ol/layer/Layer";
 import RBush, { BBox } from 'rbush';
 import {StatisticsService} from "./statistics.service";
@@ -75,7 +75,7 @@ export class TileLayerService {
   private renderViewWithStatistics(map: OlMap, ) {
     const execTime = new Date().getTime();
     const view = this.renderView(map)
-    this.statisticsService.addStatisticLoadingLayer(this.createRenderingStatistics(view, new Date().getTime() - execTime))
+    this.statisticsService.addStatisticsViewRendering(view, this.visiblePolygonsMap.size, new Date().getTime() - execTime)
   }
 
   private renderView(map: OlMap):number[] {
@@ -206,10 +206,4 @@ export class TileLayerService {
     return res
   }
 
-  private createRenderingStatistics(view:number[], timeMs:number): LoadingLayer {
-    const key = `S_${this.visiblePolygonsMap.size}_V_
-    ${view[0].toFixed(6)},${view[1].toFixed(6)};
-    ${view[2].toFixed(6)},${view[3].toFixed(6)}`
-    return {key: key, timeMs: timeMs, loaded: true, error: false}
-  }
 }
