@@ -42,4 +42,8 @@ export class ConsoleComponent implements AfterViewChecked {
   copyToMemBuffer() {
     navigator.clipboard.writeText(JSON.stringify(this.getLayers())).then(() => {});
   }
+
+  getVrsLabel() {
+    return this.statisticsService.vrs?"vrs_off":"vrs_on";
+  }
 }
