@@ -1,11 +1,4 @@
 import {Injectable} from '@angular/core';
-import ImageStatic from "ol/source/ImageStatic";
-import ImageLayer from "ol/layer/Image";
-import {get} from "ol/proj";
-import {Polygon} from "ol/geom";
-import {TileLayerService} from "./tile-layer.service";
-import {Extent} from "ol/extent";
-import OlMap from "ol/Map";
 import { timer } from 'rxjs';
 
 export interface LoadingLayer {
@@ -23,6 +16,14 @@ export class StatisticsService {
   vrs:boolean //view rendering statistics
   constructor() {
     this.vrs = false
+  }
+
+  addStatisticsViewRendering(view:number[], tileNumber:number, timeMs:number) {
+    //view - [tl[0],br[1], br[0],tl[1]]
+    const key = `S_${tileNumber}_V_
+    ${view[0].toFixed(6)},${view[1].toFixed(6)};
+    ${view[2].toFixed(6)},${view[3].toFixed(6)}`
+    this.addStatisticLoadingLayer({key: key, timeMs: timeMs, loaded: true, error: false})
   }
 
   addStatisticLoadingLayer(statisticsLoadingLayer: LoadingLayer){
