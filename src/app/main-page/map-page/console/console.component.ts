@@ -1,5 +1,6 @@
 import {AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
-import {ImageLayerService, LoadingLayer} from "../../../services/image-layer.service";
+import {LoadingLayer} from "../../../services/image-layer.service";
+import {StatisticsService} from "../../../services/statistics.service";
 
 @Component({
   selector: 'app-console',
@@ -11,12 +12,12 @@ export class ConsoleComponent implements AfterViewChecked {
 
   isConsoleOpen: boolean
 
-  constructor(private imageLayerService: ImageLayerService) {
+  constructor(private statisticsService: StatisticsService,) {
     this.isConsoleOpen = false
   }
 
   getLayers(): LoadingLayer[] {
-    return Array.from(this.imageLayerService.loadingLayers.values());
+    return Array.from(this.statisticsService.loadingLayers.values());
   }
 
   ngAfterViewChecked() {
@@ -31,7 +32,11 @@ export class ConsoleComponent implements AfterViewChecked {
   }
 
   clearConsole() {
-    this.imageLayerService.clearLoadingLayers()
+    this.statisticsService.clear()
+  }
+
+  enableVrs() {
+    this.statisticsService.vrs = !this.statisticsService.vrs
   }
 
   copyToMemBuffer() {
