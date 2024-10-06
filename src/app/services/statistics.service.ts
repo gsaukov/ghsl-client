@@ -20,7 +20,7 @@ export class StatisticsService {
 
   addStatisticsViewRendering(view:number[], tileNumber:number, timeMs:number) {
     //view - [tl[0],br[1], br[0],tl[1]]
-    const key = `S_${tileNumber}_V_${view[0]},${view[1].toFixed(6)};${view[2].toFixed(6)},${view[3].toFixed(6)}`
+    const key = `S_${tileNumber}_V_${view[0].toFixed(6)},${view[1].toFixed(6)};${view[2].toFixed(6)},${view[3].toFixed(6)}`
     this.addStatisticLoadingLayer({key: key, timeMs: timeMs, loaded: true, error: false})
   }
 
