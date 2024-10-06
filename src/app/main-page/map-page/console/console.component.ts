@@ -1,5 +1,5 @@
 import {AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
-import {LoadingLayer} from "../../../services/image-layer.service";
+import {IMAGE_FILE_PREFIX, LoadingLayer} from "../../../services/image-layer.service";
 import {StatisticsService} from "../../../services/statistics.service";
 
 @Component({
@@ -18,6 +18,10 @@ export class ConsoleComponent implements AfterViewChecked {
 
   getLayers(): LoadingLayer[] {
     return Array.from(this.statisticsService.loadingLayers.values());
+  }
+
+  getLayersCount(): number {
+    return this.getLayers().filter(v => v.key.startsWith(IMAGE_FILE_PREFIX)).length;
   }
 
   ngAfterViewChecked() {
