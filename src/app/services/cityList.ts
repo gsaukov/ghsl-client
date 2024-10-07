@@ -41,8 +41,8 @@ export const cityList: any =
         "pos": [69.240562, 41.311081]
       },
       {
-        "city": "Moscow",
-        "pos": [37.618423, 55.751244]
+        "city": "St.Petersburg",
+        "pos": [30.3086, 59.9375]
       },
       {
         "city": "New York City",
