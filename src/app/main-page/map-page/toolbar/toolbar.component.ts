@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, Renderer2, ViewChild} from '@angular/core';
 import {TileLayerService} from "../../../services/tile-layer.service";
-import {MatSlider, MatSliderDragEvent, MatSliderThumb} from "@angular/material/slider";
+import {MatSlider, MatSliderThumb} from "@angular/material/slider";
 import {ImageLayerService} from "../../../services/image-layer.service";
 import {MapService} from "../../../services/map.service";
 
@@ -22,10 +22,10 @@ export class ToolbarComponent implements AfterViewInit{
     this.formatLabel()
   }
 
-  applyOpacity(event: MatSliderDragEvent) {
-    this.imageLayerService.setOpacity(event.value)
+  applyOpacity(opacityValue:number) {
+    this.imageLayerService.setOpacity(opacityValue)
     this.tileLayerService.getVisibleLayers().forEach((value, key) => {
-      value.setOpacity(event.value)
+      value.setOpacity(opacityValue)
     });
     this.tileLayerService.refreshVisibleLayer()
   }
